@@ -1,0 +1,72 @@
+@import "_themes.scss";
+.carousel {
+  position: relative;
+  width: 100%;
+  .carousel__button {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60px;
+    width: 250px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    transition: background 100ms ease-in-out;
+  }
+  .food-button{
+    background-color: hsl(0, 0%, 95%);
+    color: black;
+    &:hover{
+      background-color: hsl(0, 0%, 100%);
+    }
+    &:active{
+      background-color: hsl(0, 0%, 95%);
+    }
+  }
+  .health-button{
+    background-color: var(--brandBlueLight);
+    color: black;
+    &:hover{
+      background-color: hsl(180, 45%, 93%);
+    }
+    &:active{
+      background-color: hsl(180, 45%, 85%);
+    }
+  }
+  .tech-button{
+    background: var(--brandRedDark);
+    color: white;
+    &:hover{
+      background-color: var(--brandRedLight);
+    }
+    &:active{
+      background-color: var(--brandRedDark);
+    }
+  }
+  .outdoor-button{
+    background-color:	hsl(227, 100%, 64%);
+    color: white;
+    &:hover{
+      background-color: hsl(227, 100%, 70%);
+    }
+    &:active{
+      background-color: hsl(227, 100%, 64%);
+    }
+  }
+  .sale-button{
+    color: black;
+    background-color: hsl(0, 0%, 100%);
+    &:hover{
+      background-color: hsl(0, 0%, 95%);
+    }
+    &:active{
+      background-color: hsl(0, 0%, 90%);
+    }
+  }
+}
+

@@ -1,0 +1,140 @@
+@import '_themes.scss';
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  background-color: var(--brandBlueDark);
+  padding: 0 2%;
+}
+
+.nav__icon{
+  cursor: pointer;
+  transition: color 100ms ease-in-out;
+}
+
+.nav--left{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  .nav__menu-icon{
+    font-size: 28px;
+    color: var(--brandBlueLight);
+    margin-right: 30px;
+    &:hover{
+      color: white;
+    }
+  }
+  .nav__logo{
+    transform: translate(0, -5px);
+    height: 45px;
+    user-select: none;
+  }
+}
+
+.nav--center{
+  $searchHeight: 40px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 2%;
+  .nav__select{
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .nav__dropdown-button{
+    height: $searchHeight;
+    width: auto;
+    border: none;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+    padding: 0 40px 0 15px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .nav__dropdown-arrow{
+    color: var(--brandBlueDark);
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    margin-right: 8px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .nav__dropdown{
+    font-size: 16px;
+    position: absolute;
+    background-color: var(--brandBlueLight);
+    height: $searchHeight;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+    border: 1px lightgray;
+    border-style: none solid none none;
+    padding: 0 10px;
+    option{
+      font-size: 20px;
+    }
+  }
+  .nav__search{
+    height: $searchHeight;
+    width: 100%;
+    min-width: 40%;
+    padding: 0 10px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    z-index: 5;
+  }
+  .nav__search-icon{
+    font-size: 28px;
+    background-color: var(--brandRed);
+    border-radius: 0 5px 5px 0;
+    height: $searchHeight;
+    min-width: 50px;
+    padding: 8px;
+    transition:  all 100ms ease-in-out;
+    &:hover{
+      background-color: var(--brandRedLight);
+    }
+    &:active{
+      background-color: var(--brandRedDark);
+    }
+  }
+}
+
+.nav--right{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  .nav__orders, .nav__lists{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: var(--brandBlueLight);
+    text-align: center;
+    margin-right: 40px;
+    height: 100%;
+    &:hover{
+      color: white;
+    }
+  }
+  .nav__lists{
+    margin-right: 30px;
+  }
+  .nav__icon{
+    font-size: 24px;
+  }
+  .nav__cart-icon{
+    font-size: 28px;
+    height: 100%;
+    color: var(--brandBlueLight);
+    &:hover{
+      color: white;
+    }
+  }
+}

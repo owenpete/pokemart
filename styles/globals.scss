@@ -1,0 +1,31 @@
+@import '_themes.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@font-face {
+  font-family: 'Pokemon';
+  src: url(../fonts/pokemon-font.ttf) format('truetype');
+}
+
+#__next{
+  width: 100%;
+  min-width: 100%;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--brandBlueLight);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Pokemon';
+  font-size: 18px;
+  letter-spacing: 1px;
+}
