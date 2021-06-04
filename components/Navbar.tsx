@@ -5,7 +5,6 @@ import { AiOutlineSearch } from 'react-icons/ai';
 
 export default function Navbar(props: any){
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
-  const selectRef = useRef<any>('');
   const [dropdown, setDropdown] = useState<any>(categories[0]);
 
   return (
@@ -13,7 +12,7 @@ export default function Navbar(props: any){
       <div className='nav--left'>
           <FiMenu className='nav__icon nav__menu-icon'/>
         <Link href='/'>
-          <img className='nav__icon nav__logo' src='./logo.png' />
+          <a><img className='nav__icon nav__logo' src='./logo.png' /></a>
         </Link>
       </div>
       <div className='nav--center'>
@@ -45,14 +44,14 @@ export default function Navbar(props: any){
         <AiOutlineSearch className='nav__search-icon' />
       </div>
       <div className='nav--right'>
-        <Link href='lists'>
-          <span className='nav__icon nav__lists'>Lists</span>
+        <Link href='/lists'>
+          <a className='nav__icon nav__lists'>Lists</a>
         </Link>
         <Link href='/orders'>
-          <span className='nav__orders nav__icon'>Orders</span>
+          <a className='nav__orders nav__icon'>Orders</a>
         </Link>
         <Link href='/cart'>
-          <FiShoppingCart className='nav__icon nav__cart-icon'/>
+          <a><FiShoppingCart className='nav__icon nav__cart-icon'/></a>
         </Link>
       </div>
     </div>

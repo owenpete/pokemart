@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 
 import Navbar from '../components/Navbar';
+import SubNav from '../components/SubNav';
 import ImageCarousel from '../components/ImageCarousel';
 import axios from 'axios';
 
@@ -9,8 +10,8 @@ interface Props{
   slides: any
 }
 
-export async function getStaticProps(){
-  let data: any;
+export async function getServerSideProps(){
+  let data: any = [];
   try{
     const response = await axios.get('http://localhost:3000/api/home/slides');
     data = await response.data.data;
@@ -25,10 +26,9 @@ export async function getStaticProps(){
 }
 
 export default function Home(props: Props) {
-  useState(()=>{
+  useEffect(()=>{
     console.log(props.slides)
-  });
-
+  })
   return (
     <div className='index'>
       <Head>
@@ -37,6 +37,7 @@ export default function Home(props: Props) {
         <link rel="icon" href="/ballLogo.png" />
       </Head>
       <Navbar />
+      <SubNav />
       <ImageCarousel
         slides={props.slides}
       />

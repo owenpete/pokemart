@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import Image from 'next/image';
 import { Carousel } from 'react-responsive-carousel';
 
 interface Props{
@@ -30,31 +31,51 @@ export default function ImageCarousel(props: Props) {
       >
         <div className='carousel__element'>
           <div className='carousel__image-container'>
-            <img src={props.slides[findByName(props.slides, 'health')].url} />
+            <Image
+              src={props.slides[findByName(props.slides, 'health')].url}
+              height={550}
+              width={1920}
+            />
             <input className='carousel__button health-button' value='Shop Health & Wellness'type='button' />
           </div>
         </div>
         <div className='carousel__element'>
           <div className='carousel__image-container'>
-            <img src={props.slides[findByName(props.slides, 'food')].url} />
+            <Image
+              src={props.slides[findByName(props.slides, 'food')].url}
+              height={550}
+              width={1920}
+            />
             <input className='carousel__button food-button' value='Shop Food & Drink'type='button' />
           </div>
         </div>
         <div className='carousel__element'>
           <div className='carousel__image-container'>
-            <img src={props.slides[findByName(props.slides, 'tech')].url} />
+            <Image
+              src={props.slides[findByName(props.slides, 'tech')].url}
+              height={550}
+              width={1920}
+            />
             <input className='carousel__button tech-button' value='Shop Tech'type='button' />
           </div>
         </div>
         <div className='carousel__element'>
           <div className='carousel__image-container'>
-            <img src={props.slides[findByName(props.slides, 'outdoor')].url} />
+            <Image
+              src={props.slides[findByName(props.slides, 'outdoor')].url}
+              height={550}
+              width={1920}
+            />
             <input className='carousel__button outdoor-button' value='Shop Sports & Outdoors'type='button' />
           </div>
         </div>
         <div className='carousel__element'>
           <div className='carousel__image-container'>
-            <img src={props.slides[findByName(props.slides, 'sale')].url} />
+            <Image
+              src={props.slides[findByName(props.slides, 'sale')].url}
+              height={550}
+              width={1920}
+            />
             <input className='carousel__button sale-button' value='Shop Sales'type='button' />
           </div>
         </div>
