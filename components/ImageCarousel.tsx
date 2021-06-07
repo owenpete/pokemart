@@ -6,6 +6,8 @@ interface Props{
   slides: any
 }
 
+const slideNames = ['health', 'food', 'tech', 'outdoor', 'sale'];
+
 const findByName = (arr: any[], name: string) =>{
   for(let i = 0; i < arr.length; i++){
     if(arr[i].name==name){
@@ -29,56 +31,23 @@ export default function ImageCarousel(props: Props) {
         showThumbs={false}
         showStatus={false}
       >
-        <div className='carousel__element'>
-          <div className='carousel__image-container'>
-            <Image
-              src={props.slides[findByName(props.slides, 'health')].url}
-              height={550}
-              width={1920}
-            />
-            <input className='carousel__button health-button' value='Shop Health & Wellness'type='button' />
-          </div>
-        </div>
-        <div className='carousel__element'>
-          <div className='carousel__image-container'>
-            <Image
-              src={props.slides[findByName(props.slides, 'food')].url}
-              height={550}
-              width={1920}
-            />
-            <input className='carousel__button food-button' value='Shop Food & Drink'type='button' />
-          </div>
-        </div>
-        <div className='carousel__element'>
-          <div className='carousel__image-container'>
-            <Image
-              src={props.slides[findByName(props.slides, 'tech')].url}
-              height={550}
-              width={1920}
-            />
-            <input className='carousel__button tech-button' value='Shop Tech'type='button' />
-          </div>
-        </div>
-        <div className='carousel__element'>
-          <div className='carousel__image-container'>
-            <Image
-              src={props.slides[findByName(props.slides, 'outdoor')].url}
-              height={550}
-              width={1920}
-            />
-            <input className='carousel__button outdoor-button' value='Shop Sports & Outdoors'type='button' />
-          </div>
-        </div>
-        <div className='carousel__element'>
-          <div className='carousel__image-container'>
-            <Image
-              src={props.slides[findByName(props.slides, 'sale')].url}
-              height={550}
-              width={1920}
-            />
-            <input className='carousel__button sale-button' value='Shop Sales'type='button' />
-          </div>
-        </div>
+        {slideNames.map((value: any, index: number)=>{
+            return(
+              <div className='carousel__element'>
+                <div className='carousel__image-container'>
+                  <Image
+                    src={props.slides[findByName(props.slides, value)].url}
+                    height={550}
+                    width={1920}
+                    layout='fixed'
+                    quality={100}
+                  />
+                  <input className={`carousel__button ${value}-button`} value={props.slides[findByName(props.slides, value)].buttonText} type='button' />
+                </div>
+              </div>
+            );
+          })
+        }
       </Carousel>
     </div>
   );
