@@ -11,6 +11,7 @@
     "@types/mongodb": "^3.6.17",
     "@types/mongoose": "^5.10.5",
     "@types/react-slick": "^0.23.4",
+    "aws4": "^1.11.0",
     "axios": "^0.21.1",
     "jquery": "^3.6.0",
     "mongodb": "^3.6.9",
