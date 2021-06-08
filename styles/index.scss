@@ -37,6 +37,7 @@
 .product-section__grid{
   display: grid;
   justify-content: space-around;
+  grid-gap: 30px;
   grid-template-columns: auto auto auto auto;
   grid-template-areas:
     'product product product product product'
@@ -49,9 +50,8 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  height: 300px;
-  width: auto;
-  margin: 10px;
+  height: 275px;
+  width: 200px;
   background-color: white;
   border-radius: 5px;
   padding: 2% 6%;
@@ -60,6 +60,7 @@
 .product-section__info-container{
   display: flex;
   flex-direction: column;
+  width: 100%;
   .info__element{
     margin-bottom: 5px;
   }
@@ -70,7 +71,7 @@
     }
   }
   .info__price{
-    font-size: 24px;
+    font-size: 26px;
   }
   .info__description{
     font-size: 16px;
@@ -80,7 +81,7 @@
 .index__more-products-button{
   height: 60px;
   width: 300px;
-  margin-top: 20px;
+  margin-top: 40px;
   font-size: 28px;
   border: none;
   border-radius: 5px;

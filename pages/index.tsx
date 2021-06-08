@@ -61,7 +61,7 @@ export default function Home(props: Props) {
       <div className="index__product-section">
         <div className='product-section__grid'>
           {
-            props.products.map((value)=>{
+            props.products.slice(0, 15).map((value)=>{
               return (
                 <div className="product-section__product">
                   <div
@@ -86,6 +86,7 @@ export default function Home(props: Props) {
                       <a className='info__name info__element'>{value.name}</a>
                     </Link>
                     <ReactStars
+                      classNames='info__element'
                       value={value.rating}
                       count={5}
                       isHalf={true}
@@ -93,7 +94,6 @@ export default function Home(props: Props) {
                       size={28}
                     />
                     <span className='info__price info__element'>{value.price}$</span>
-                    <span className='info__description info__element'>{value.description}</span>
                   </div>
                 </div>
               )
