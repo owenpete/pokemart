@@ -88,6 +88,10 @@
   outline: none;
   background-color: white;
   color: black;
+  transition: 100ms all ease-in-out;
+  &:hover{
+    background-color: var(--offWhite);
+  }
 }
 
 .footer{

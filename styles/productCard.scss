@@ -1,0 +1,33 @@
+@import '_themes.scss';
+
+.product-card{
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 3%;
+  margin: 1% 0;
+  height: 200px;
+}
+
+.product__image-container{
+}
+
+.product__info{
+  .product__info-element{
+    margin-bottom: 5px;
+  }
+  .product__name{
+    font-size: 28px;
+  }
+  .product__price{
+    font-size: 28px;
+    margin-right: auto;
+  }
+}
+.product__description{
+  color: lightgray;
+  height: 100%;
+  width: 200px;
+  margin: 0 auto;
+}

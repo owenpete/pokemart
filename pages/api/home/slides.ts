@@ -1,5 +1,5 @@
 import connectGeneral from '../../../utils/connectGeneral';
-import Slide from '../../../schemas/Slide';
+import Slide from '../../../schemas/SlideSchema';
 
 export default async function(req: any, res: any){
   const db = await connectGeneral();

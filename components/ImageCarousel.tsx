@@ -31,9 +31,10 @@ export default function ImageCarousel(props: Props) {
         showThumbs={false}
         showStatus={false}
       >
-        {slideNames.map((value: any, index: number)=>{
+        {
+          slideNames.map((value: any, index: number)=>{
             return(
-              <div className='carousel__element'>
+              <div className='carousel__element' key={Math.random()*new Date().getSeconds()}>
                 <div className='carousel__image-container'>
                   <Image
                     src={props.slides[findByName(props.slides, value)].url}

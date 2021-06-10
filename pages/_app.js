@@ -7,6 +7,8 @@ import "../styles/subnav.scss";
 import Router from "next/router";
 import NProgress from "nprogress";
 import "../styles/nprogress.scss";
+import '../styles/store.scss';
+import '../styles/productCard.scss';
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());

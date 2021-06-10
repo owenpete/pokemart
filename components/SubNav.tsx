@@ -11,7 +11,7 @@ export default function SubNav(){
           </Link>
         </li>
         <li className='subnav__item'>
-          <Link href='store'>
+          <Link href='/store'>
             <a>On Sale</a>
           </Link>
         </li>
