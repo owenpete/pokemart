@@ -24,7 +24,11 @@ export async function getServerSideProps() {
     console.log(err);
   }
   try {
-    const response = await axios.get("http://localhost:3000/api/products");
+    const response = await axios.get("http://localhost:3000/api/products",{
+      params: {
+        limit: 15
+      }
+    });
     products = await response.data.data;
   } catch (err: any) {
     console.log(err);

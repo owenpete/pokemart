@@ -1,0 +1,19 @@
+.selector{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.selector__container{
+  display: flex;
+  align-items: center;
+  padding: 0;
+  .selector__action{
+    font-size: 28px;
+    margin: 2px;
+  }
+  .selector__number{
+    font-size: 28px;
+    margin: 0 10px;
+  }
+}

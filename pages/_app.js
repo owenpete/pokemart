@@ -9,6 +9,7 @@ import NProgress from "nprogress";
 import "../styles/nprogress.scss";
 import '../styles/store.scss';
 import '../styles/productCard.scss';
+import '../styles/pageSelector.scss';
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());

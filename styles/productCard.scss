@@ -16,18 +16,16 @@
 .product__info{
   .product__info-element{
     margin-bottom: 5px;
+    transition: 100ms all ease-in-out;
   }
   .product__name{
     font-size: 28px;
+    &:hover{
+      color: var(--brandRed);
+    }
   }
   .product__price{
     font-size: 28px;
     margin-right: auto;
   }
-}
-.product__description{
-  color: lightgray;
-  height: 100%;
-  width: 200px;
-  margin: 0 auto;
 }

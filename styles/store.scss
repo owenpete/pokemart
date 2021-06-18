@@ -1,8 +1,15 @@
 @import '_themes.scss';
 
+$storePadding: 18%;
+
 .store__main{
-  padding: 0 20%;
+  padding: 0 $storePadding;
   width: 100%;
+}
+
+.resbar__left{
+  display: flex;
+  align-items: center;
 }
 
 .store__resbar{
@@ -11,10 +18,13 @@
   position: relative;
   width: 100%;
   height: 40px;
-  padding: 0 2%;
+  padding: 0 $storePadding;
   background-color: var(--offWhite);
 }
-.resbar__filter-container{
+.resbar__result-number{
+  display: inline-block;
+}
+.resbar__right{
   margin-left: auto;
 }
 .resbar__filter{
