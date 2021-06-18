@@ -1,11 +1,24 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import router from 'next/router';
 import Link from 'next/link';
 import { FiMenu, FiShoppingCart, FiChevronDown } from 'react-icons/fi';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-export default function Navbar(props: any){
+export default function Navbar(){
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
   const [dropdown, setDropdown] = useState<any>(categories[0]);
+  const [search, setSearch] = useState<string>("");
+
+  const handleSearch = (event: any) =>{
+    if(event.key == 'Enter' && search != ''){
+      router.push({
+        pathname: '/store',
+        query: {
+          q: search
+        }
+      });
+    }
+  }
 
   return (
     <div className='nav'>
@@ -38,10 +51,30 @@ export default function Navbar(props: any){
           className='nav__search'
           type='text'
           placeholder='Search'
+          onChange={(e)=>setSearch(e.target.value)}
+          onKeyDown={(e)=>handleSearch(e)}
           onFocus={(e)=>e.target.placeholder=''}
           onBlur={(e)=>e.target.placeholder='Search'}
         />
-        <AiOutlineSearch className='nav__search-icon' />
+        <Link
+          href={{
+            pathname: '/store',
+            query: {
+              q: search
+            }
+          }}
+        >
+          <a style={
+              {
+                display: 'flex',
+                alignItems: 'center'
+              }
+            }>
+            <AiOutlineSearch
+              className='nav__search-icon'
+            />
+          </a>
+      </Link>
       </div>
       <div className='nav--right'>
         <Link href='/lists'>

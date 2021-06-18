@@ -9,18 +9,17 @@ export default async function (req: any, res: any) {
   let query: any = {};
 
   if(q){
-    query.price=q;
-    console.log(query)
+    query.name=q;
   }
 
   const product = db.model("Product", ProductSchema);
 
   const data = await product
-    .find({price: 100})
+    .find(query)
     .skip(parseInt(skip))
     .limit(parseInt(limit));
 
-  const totalResults = await product.find({price: 100}).countDocuments();
+  const totalResults = await product.find(query).countDocuments();
 
   res.status(200).json({
     data: data,
