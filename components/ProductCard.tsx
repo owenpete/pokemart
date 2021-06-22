@@ -8,6 +8,7 @@ interface Props{
   description: string;
   price: number;
   rating: number;
+  href: string;
 }
 
 export default function ProductCard(props: Props){
@@ -16,7 +17,7 @@ export default function ProductCard(props: Props){
       <div
         className='product__image-container'
       >
-        <Link href='/store'>
+        <Link href={`/products/${props.href}`}>
           <a>
             <Image
               src={props.img}
@@ -29,7 +30,7 @@ export default function ProductCard(props: Props){
         </Link>
       </div>
       <div className='product__info'>
-        <Link href='/store'>
+        <Link href={`/products/${props.href}`}>
           <a>
             <div className='product__info-element product__name'>
               {props.name}

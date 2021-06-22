@@ -1,0 +1,133 @@
+.product{
+}
+
+.product__container{
+  display: flex;
+  flex-direction: row;
+  margin: 5% 15%;
+}
+
+.product__carousel{
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 600px;
+  width: 600px;
+}
+
+.carousel__image{
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.product__info{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  margin-left: 3rem;
+  padding: 1rem 2rem;
+  .info__element{
+    display: inline-block;
+  }
+  .info__name{
+    font-size: 38px;
+  }
+  .info__rating{
+    span{
+      margin-right: 2px;
+    }
+  }
+  .info__price{
+    font-size: 32px;
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+  }
+  .info__description{
+    height: 100%;
+    margin: 0.5rem 0 1rem 0;
+    padding: 1rem 0;
+    border: 2px solid hsla(0, 0%, 0%, 10%);
+    border-style: solid none;
+    overflow: hidden;
+    span{
+      font-size: 18px;
+      line-height: 1.5rem;
+    }
+  }
+}
+
+.quantity__label{
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+}
+.info__quantity{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 5rem;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  $dropdownHeight: 35px;
+  .quantity__dropdown-button{
+    background-color: white;
+    text-align: left;
+    height: $dropdownHeight;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 0 40px 0 15px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .quantity__dropdown-arrow{
+    color: var(--brandBlueDark);
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    margin-right: 8px;
+    z-index: 5;
+    pointer-events: none;
+
+  }
+  .quantity__dropdown{
+    font-size: 16px;
+    position: absolute;
+    background-color: white;
+    height: $dropdownHeight;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    border: 1px lightgray;
+    border-style: none solid none none;
+    padding: 0 10px;
+    option{
+      font-size: 20px;
+    }
+  }
+}
+
+.info__buy-actions{
+  .info__add-to-cart-button, .info__buy-it-now-button{
+    height: 50px;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 24px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--brandRed);
+    transition: all ease-in-out 100ms;
+    &:hover{
+      background-color: var(--brandRedLight);
+    }
+    &:active{
+      background-color: var(--brandRedDark);
+    }
+  }
+}

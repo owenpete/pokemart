@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import router from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FiMenu, FiShoppingCart, FiChevronDown } from 'react-icons/fi';
 import { AiOutlineSearch } from 'react-icons/ai';
 
@@ -25,7 +26,7 @@ export default function Navbar(){
       <div className='nav--left'>
           <FiMenu className='nav__icon nav__menu-icon'/>
         <Link href='/'>
-          <a><img className='nav__icon nav__logo' src='./logo.png' /></a>
+          <a><img className='nav__icon nav__logo' src='/logo.png' /></a>
         </Link>
       </div>
       <div className='nav--center'>

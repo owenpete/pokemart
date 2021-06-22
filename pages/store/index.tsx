@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
+import router from 'next/router';
 import Navbar from '../../components/Navbar';
 import SubNav from '../../components/SubNav';
 import ProductCard from '../../components/ProductCard';
@@ -27,6 +28,7 @@ export async function getServerSideProps({query}){
       limit: query.r || 8,
       q: query.q || null,
       page: query.page || 1,
+      f: query.f,
     }
   });
   const data = await response.data;
@@ -46,13 +48,52 @@ const getPageCount = (itemCount: number, resPerPage: number) =>{
 }
 
 export default function Store(props: Props){
+  useEffect(()=>{
+    if(props.query.f){
+      setFilter(filterCategories[filterCategories.findIndex(value=>props.query.f==value.filter)].name)
+    }
+  }, [props.query.f]);
   //!
   const resultOptions = [16, 32, 64, 128];
 
-  const categories = ['Featured', 'Price: Low to High', 'Price High to Low', 'A-Z'];
+  const filterCategories = [
+    {
+      name:'Featured',
+      filter: ''
+    },
+    {
+      name:'Price: Low to High',
+      filter: 'price-asc'
+    },
+    {
+      name:'Price: High to Low',
+      filter: 'price-desc'
+    },
+    {
+      name:'A-Z',
+      filter: 'a-z'
+    },
+    {
+      name:'Z-A',
+      filter: 'z-a'
+    },
+  ];
+
   const [pageNumber, setPageNumber] = useState<number>(props.page);
   const [resPerPage, setResPerPage] = useState<any>(props.resPerPage || resultOptions[0]);
-  const [filter, setFilter] = useState<any>(categories[0]);
+  const [filter, setFilter] = useState<any>(filterCategories[0].name);
+
+  const handleFilter = (filter: string) =>{
+    router.push({
+      href: '/store',
+      query: {
+        ...props.query,
+        page: 1,
+        f: filterCategories[filterCategories.findIndex(value=>filter==value.name)].filter
+      }
+    });
+  }
+
   return (
     <div className='store'>
       <Head>
@@ -72,13 +113,14 @@ export default function Store(props: Props){
               <select
                 name='catagories'
                 className='resbar__dropdown'
-                onChange={(e)=>{console.log(e); setFilter(e.target.value)}}
+                onChange={(e)=>{handleFilter(e.target.value)}}
                 value={filter}
               >
                 {
-                  categories.map((value)=>{
+                  //populating filters
+                  filterCategories.map((value)=>{
                     return (
-                      <option value={value} key={Math.random()}>{value}</option>
+                      <option value={value.name} key={Math.random()}>{value.name}</option>
                     );
                   })
                 }
@@ -88,8 +130,8 @@ export default function Store(props: Props){
       </div>
       <ul className='store__main'>
         {
+          //populating page with products
           props.products.map((value: any)=>{
-            console.log(value)
             return (
               <ProductCard
                 img={value.images[0]}
@@ -97,6 +139,7 @@ export default function Store(props: Props){
                 description={value.description}
                 price={value.price}
                 rating={value.rating}
+                href={value.id}
                 key={Math.random()}
               />
             )

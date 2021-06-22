@@ -50,7 +50,9 @@ export default function Home(props: Props) {
       </Head>
       <Navbar />
       <SubNav />
-      <ImageCarousel slides={props.slides} />
+      <ImageCarousel
+        slides={props.slides}
+      />
       <div className="index__store-header">
         <Link href="/store">
           <a className='store-header__link'>
@@ -61,7 +63,7 @@ export default function Home(props: Props) {
       <div className="index__product-section">
         <div className='product-section__grid'>
           {
-            props.products.slice(0, 15).map((value)=>{
+            props.products.slice(0, 15).map((value: any)=>{
               return (
                 <div className="product-section__product" key={Math.random()*new Date().getSeconds()}>
                   <div

@@ -4,22 +4,73 @@ import ProductSchema from "../../schemas/ProductSchema";
 export default async function (req: any, res: any) {
   const db = await connectStore();
 
-  const { skip, limit, q } = req.query;
+  const { skip, limit, searchFields, q, f } = req.query;
 
   let query: any = {};
 
-  if(q){
+  if(q&&!searchFields){
     query.name=q;
+    console.log(query)
+  }else if(searchFields){
+    query = Object.assign(query, JSON.parse(searchFields));
+    console.log(query)
   }
 
   const product = db.model("Product", ProductSchema);
+  let data: any;
+  let totalResults: any;
 
-  const data = await product
-    .find(query)
-    .skip(parseInt(skip))
-    .limit(parseInt(limit));
+  if(f){
+    switch(f){
+      case 'price-asc':
+        data = await product
+          .find(query)
+          .sort('price')
+          .skip(parseInt(skip))
+          .limit(parseInt(limit));
+        totalResults = await product.find(query).countDocuments();
+        break;
+      case 'price-desc':
+        data = await product
+          .find(query)
+          .sort('-price')
+          .skip(parseInt(skip))
+          .limit(parseInt(limit));
+        totalResults = await product.find(query).countDocuments();
+        break;
+      case 'a-z':
+        data = await product
+          .find(query)
+          .sort('name')
+          .skip(parseInt(skip))
+          .limit(parseInt(limit));
+        totalResults = await product.find(query).countDocuments();
+        break;
+      case 'z-a':
+        data = await product
+          .find(query)
+          .sort('-name')
+          .skip(parseInt(skip))
+          .limit(parseInt(limit));
+        totalResults = await product.find(query).countDocuments();
+        break;
+      default:
+        data = await product
+          .find(query)
+          .skip(parseInt(skip))
+          .limit(parseInt(limit));
 
-  const totalResults = await product.find(query).countDocuments();
+        totalResults = await product.find(query).countDocuments();
+        break;
+    }
+  }else{
+    data = await product
+      .find(query)
+      .skip(parseInt(skip))
+      .limit(parseInt(limit));
+
+    totalResults = await product.find(query).countDocuments();
+  }
 
   res.status(200).json({
     data: data,
