@@ -109,7 +109,6 @@
 
 .nav--right{
   display: flex;
-  align-items: center;
   height: 100%;
   .nav__orders, .nav__lists{
     display: flex;
@@ -126,15 +125,30 @@
   .nav__lists{
     margin-right: 30px;
   }
+  .nav__icon-container{
+    position: relative;
+    margin: auto 0;
+  }
   .nav__icon{
     font-size: 24px;
   }
   .nav__cart-icon{
     font-size: 28px;
-    height: 100%;
     color: var(--brandBlueLight);
     &:hover{
       color: white;
     }
+  }
+  .nav__cart-size{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: var(--brandRed);
+    transform: translate(10px, -5px);
   }
 }

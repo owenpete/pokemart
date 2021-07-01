@@ -1,4 +1,4 @@
-import connectGeneral from '../../../utils/connectGeneral';
+import connectGeneral from '../../../server/connectGeneral';
 import Slide from '../../../schemas/SlideSchema';
 
 export default async function(req: any, res: any){

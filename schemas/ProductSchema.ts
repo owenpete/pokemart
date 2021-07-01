@@ -28,6 +28,11 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  //Number of sales
+  NOS: {
+    type: Number,
+    default: 0,
+  },
   rating: {
     type: Number,
     default: 0,

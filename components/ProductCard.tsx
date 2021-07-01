@@ -46,7 +46,7 @@ export default function ProductCard(props: Props){
           size={28}
         />
         <div className='product__info-element product__price'>
-          {props.price}$
+          ${props.price}
         </div>
       </div>
     </div>

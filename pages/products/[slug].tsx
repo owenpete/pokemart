@@ -11,7 +11,8 @@ import { FiChevronDown } from 'react-icons/fi';
 import axios from 'axios';
 import { Carousel } from 'react-responsive-carousel';
 import ReactStars from "react-rating-stars-component";
-import * as NumericInput from "react-numeric-input";
+
+import { addCart } from '../../utils/cart';
 
 interface Props{
   product: any;
@@ -104,7 +105,7 @@ const Product = (props: Props) =>{
               edit={false}
               size={36}
             />
-          <span className='info__element info__price'>{props.product.price}$</span>
+          <span className='info__element info__price'>${props.product.price}</span>
           <label className='info__element quantity__label'>Quantity: </label>
           <div className='info__quantity'>
             <input className='quantity__dropdown-button' value={dropdown} type='button' />
@@ -128,8 +129,17 @@ const Product = (props: Props) =>{
             <span>{props.product.description}</span>
           </div>
           <div className='info__buy-actions'>
-            <input className='info__element info__add-to-cart-button' type='button' value='Add to cart' />
-            <input className='info__element info__buy-it-now-button' type='button' value='Buy it now' />
+            <input
+              className='info__element info__add-to-cart-button'
+              type='button'
+              value='Add to cart'
+              onClick={()=>{addCart(props.product.id)}}
+            />
+            <input
+              className='info__element info__buy-it-now-button'
+              type='button'
+              value='Buy it now'
+            />
           </div>
         </div>
       </div>

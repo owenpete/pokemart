@@ -1,0 +1,10 @@
+.side-cart{
+  display: flex;
+  position: fixed;
+  right: 0;
+  background-color: green;
+  width: 500px;
+  height: 100%;
+  z-index: 100;
+  transition: all ease-in-out 250ms;
+}

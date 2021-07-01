@@ -39,7 +39,7 @@ export async function getServerSideProps({query}){
       resPerPage: data.query.limit,
       page: data.query.page,
       query
-    }
+    },
   }
 }
 

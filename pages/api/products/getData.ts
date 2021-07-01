@@ -1,5 +1,4 @@
-
-import connectStore from "../../../utils/connectStore";
+import connectStore from "../../../server/connectStore";
 import ProductSchema from "../../../schemas/ProductSchema";
 
 export default async function (req: any, res: any) {

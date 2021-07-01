@@ -5,10 +5,38 @@ import Image from 'next/image';
 import { FiMenu, FiShoppingCart, FiChevronDown } from 'react-icons/fi';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-export default function Navbar(){
+import SideCart from '../components/SideCart';
+
+import { getCart, addCart } from '../utils/cart';
+import toggleCart from '../utils/toggleCart';
+
+interface Props{
+  isToggled: boolean;
+  setToggle: any;
+  sideCartRef: any
+}
+
+export default function Navbar(props: Props){
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
   const [dropdown, setDropdown] = useState<any>(categories[0]);
   const [search, setSearch] = useState<string>("");
+  const [cart, setCart] = useState<string[]>([]);
+ const sideCartRef = useRef<any>();
+
+  const [cartToggle, setCartToggle] = useState<boolean>(false);
+
+  useEffect(() => {
+    //pull cart data from storage and display the proper number next to the cart icon
+    setCart(getCart());
+    function checkUserData() {
+      const item = getCart();
+      setCart(item)
+    }
+    window.addEventListener("storage", checkUserData)
+    return () => {
+      window.removeEventListener("storage", checkUserData)
+    }
+  }, []);
 
   const handleSearch = (event: any) =>{
     if(event.key == 'Enter' && search != ''){
@@ -84,9 +112,22 @@ export default function Navbar(){
         <Link href='/orders'>
           <a className='nav__orders nav__icon'>Orders</a>
         </Link>
-        <Link href='/cart'>
-          <a><FiShoppingCart className='nav__icon nav__cart-icon'/></a>
-        </Link>
+          <div
+            className='nav__icon-container'
+            onClick={()=>toggleCart(cartToggle, setCartToggle, sideCartRef)}
+          >
+            {cart&&
+              <span className='nav__cart-size'>
+                {cart.length}
+              </span>
+            }
+            <FiShoppingCart className='nav__icon nav__cart-icon'/>
+          </div>
+        <SideCart
+          isToggled={true}
+          setToggle={setCartToggle}
+          cartRef={sideCartRef}
+        />
       </div>
     </div>
   );

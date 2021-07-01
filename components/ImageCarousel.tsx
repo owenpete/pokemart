@@ -42,6 +42,7 @@ export default function ImageCarousel(props: Props) {
                     width={1920}
                     layout='fixed'
                     quality={100}
+                    priority
                   />
                   <input className={`carousel__button ${value}-button`} value={props.slides[findByName(props.slides, value)].buttonText} type='button' />
                 </div>
