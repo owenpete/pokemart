@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import SubNav from '../components/SubNav';
 
@@ -27,12 +28,13 @@ export default function Cart(props: Props){
   }, [])
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [cart, setCart] = useState<any>();
+
   return (
     <div className='cart'>
+      <Navbar />
+      <SubNav />
       {isLoaded&&
       <>
-        <Navbar />
-        <SubNav />
         <div className='cart__list'>
           {cart&&
             cart.map((value: any)=>{
@@ -45,6 +47,15 @@ export default function Cart(props: Props){
           }
         </div>
       </>
+      }
+      {!isLoaded&&
+        <div className='cart__loading'>
+          <Image
+            src='/ballLogo.png'
+            height={50}
+            width={50}
+          />
+        </div>
       }
     </div>
   );
