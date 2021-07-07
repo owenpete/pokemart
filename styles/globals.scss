@@ -11,6 +11,15 @@
   min-width: 100%;
 }
 
+#dimmer{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  transition: all ease-in-out 150ms;
+  z-index: 100;
+}
+
 html,
 body {
   padding: 0;

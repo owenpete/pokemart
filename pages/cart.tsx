@@ -8,26 +8,44 @@ import { getCart } from '../utils/cart';
 import axios from 'axios';
 
 interface Props{
+  cart: any;
 }
 
 export default function Cart(props: Props){
-  useEffect(async()=>{
-    const cart = getCart();
-    let res;
-    try{
-      res = await axios.get({
-        url: 'http://localhost:3000/api/cart',
+  useEffect(()=>{
+    (async() =>{
+      const ids = getCart();
+      const data = await axios.get('http://localhost:3000/api/cart', {
+        params: {
+          ids: ids
+        }
       });
-    }catch(err){
-      console.log(err)
-    }
-    const data = await res;
-    console.log(data);
-  });
+    setCart(data.data.data);
+    setIsLoaded(true);
+    console.log(JSON.parse(window.localStorage.getItem('cart')))
+    })();
+  }, [])
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [cart, setCart] = useState<any>();
   return (
     <div className='cart'>
-      <Navbar />
-      <SubNav />
+      {isLoaded&&
+      <>
+        <Navbar />
+        <SubNav />
+        <div className='cart__list'>
+          {cart&&
+            cart.map((value: any)=>{
+              return(
+                <ul className='cart__element' key={Math.random()}>
+                  {value.name}
+                </ul>
+              )
+            })
+          }
+        </div>
+      </>
+      }
     </div>
   );
 }

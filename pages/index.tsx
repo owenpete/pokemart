@@ -44,7 +44,6 @@ export async function getStaticProps() {
 }
 
 export default function Home(props: Props) {
-  const sideCartRef = useRef<any>();
   //this funcion toggles the state of the sideCart component
   return (
     <div className="index">
@@ -53,7 +52,6 @@ export default function Home(props: Props) {
         <link rel="icon" href="/ballLogo.png" />
       </Head>
       <Navbar
-        sideCartRef={sideCartRef}
       />
       <SubNav />
       <ImageCarousel slides={props.slides} />
@@ -120,10 +118,6 @@ export default function Home(props: Props) {
           </a>
         </Link>
       </div>
-      <SideCart
-        isToggled={false}
-        setToggle={()=>console.log('yo')}
-      />
       <div className="footer"></div>
     </div>
   );

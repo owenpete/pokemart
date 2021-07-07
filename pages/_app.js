@@ -25,6 +25,7 @@ Router.events.on("routeChangeError", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
   return(
     <div className='app'>
+      <div id='dimmer'></div>
       <Component {...pageProps} />
     </div>
   )

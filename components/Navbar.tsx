@@ -8,22 +8,13 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import SideCart from '../components/SideCart';
 
 import { getCart, addCart } from '../utils/cart';
-import toggleCart from '../utils/toggleCart';
+import updateCartState from '../utils/toggleCart';
 
-interface Props{
-  isToggled: boolean;
-  setToggle: any;
-  sideCartRef: any
-}
-
-export default function Navbar(props: Props){
+export default function Navbar(){
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
   const [dropdown, setDropdown] = useState<any>(categories[0]);
   const [search, setSearch] = useState<string>("");
-  const [cart, setCart] = useState<string[]>([]);
- const sideCartRef = useRef<any>();
-
-  const [cartToggle, setCartToggle] = useState<boolean>(false);
+  const [cart, setCart] = useState<any>({});
 
   useEffect(() => {
     //pull cart data from storage and display the proper number next to the cart icon
@@ -43,7 +34,7 @@ export default function Navbar(props: Props){
       router.push({
         pathname: '/store',
         query: {
-          q: search
+          q: search,
         }
       });
     }
@@ -112,22 +103,20 @@ export default function Navbar(props: Props){
         <Link href='/orders'>
           <a className='nav__orders nav__icon'>Orders</a>
         </Link>
-          <div
+        <Link href='/cart'>
+          <a
             className='nav__icon-container'
-            onClick={()=>toggleCart(cartToggle, setCartToggle, sideCartRef)}
           >
             {cart&&
               <span className='nav__cart-size'>
                 {cart.length}
               </span>
             }
-            <FiShoppingCart className='nav__icon nav__cart-icon'/>
-          </div>
-        <SideCart
-          isToggled={true}
-          setToggle={setCartToggle}
-          cartRef={sideCartRef}
-        />
+            <FiShoppingCart
+              className='nav__icon nav__cart-icon'
+            />
+          </a>
+        </Link>
       </div>
     </div>
   );

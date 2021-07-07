@@ -9,8 +9,14 @@ export const getCart = () =>{
 
 export const addCart = (productId: string) =>{
   try{
-    const cart: any[] = getCart() || [];
-    window.localStorage.setItem('cart', JSON.stringify([...cart, productId]));
+    let cart: any = getCart() || {};
+    if(cart[productId]){
+      cart[productId] = {...cart[productId], q: cart[productId].q+=1}
+      window.localStorage.setItem('cart', JSON.stringify({...cart}));
+    }else{
+      cart[productId] = { id: productId, q: 1 };
+      window.localStorage.setItem('cart', JSON.stringify({...cart}));
+    }
     window.dispatchEvent( new Event('storage') );
   }catch(err: any){
     console.log(err)
