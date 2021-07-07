@@ -5,16 +5,13 @@ import Image from 'next/image';
 import { FiMenu, FiShoppingCart, FiChevronDown } from 'react-icons/fi';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-import SideCart from '../components/SideCart';
-
 import { getCart, addCart } from '../utils/cart';
-import updateCartState from '../utils/toggleCart';
 
 export default function Navbar(){
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
   const [dropdown, setDropdown] = useState<any>(categories[0]);
   const [search, setSearch] = useState<string>("");
-  const [cart, setCart] = useState<any>({});
+  const [cart, setCart] = useState<any>(null);
 
   useEffect(() => {
     //pull cart data from storage and display the proper number next to the cart icon
@@ -109,7 +106,9 @@ export default function Navbar(){
           >
             {cart&&
               <span className='nav__cart-size'>
-                {cart.length}
+                {
+                  Object.entries(cart).map((value: any)=>{return(value[1].q);}).reduce((total: number, value: number)=>total+=value)
+                }
               </span>
             }
             <FiShoppingCart
