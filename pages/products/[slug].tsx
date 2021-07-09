@@ -113,7 +113,7 @@ const Product = (props: Props) =>{
             <select
               name='catagories'
               className='quantity__dropdown'
-              onChange={(e)=>{console.log(e); setDropdown(parseInt(e.target.value))}}
+              onChange={(e)=>{setDropdown(parseInt(e.target.value))}}
               value={dropdown}
             >
               {

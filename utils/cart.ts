@@ -7,11 +7,11 @@ export const getCart = () =>{
   }
 }
 
-export const addCart = (productId: string) =>{
+export const addCart = (productId: string, numberOfItems?: number) =>{
   try{
     let cart: any = getCart() || {};
     if(cart[productId]){
-      cart[productId] = {...cart[productId], q: cart[productId].q+=1}
+      cart[productId] = {...cart[productId], q: cart[productId].q = numberOfItems || cart[productId].q+1 }
       window.localStorage.setItem('cart', JSON.stringify({...cart}));
     }else{
       cart[productId] = { id: productId, q: 1 };

@@ -3,11 +3,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import SubNav from '../components/SubNav';
+import CartProduct from '../components/CartProduct';
 
 import { getCart } from '../utils/cart';
 import localInstance from '../services/api/localInstance';
-
-import axios from 'axios';
 
 interface Props{
   cart: any;
@@ -37,33 +36,21 @@ return (
     <SubNav />
     {isLoaded&&
     <>
-      <div className='cart__list'>
+      <ul className='cart__list'>
         {cart&&
           cart.map((value: any, index: number)=>{
             return(
-              <ul className='cart__product' key={Math.random()}>
-                <Image
-                  src={value.images[0]}
-                  height={150}
-                  width={150}
-                  quality={100}
-                />
-                <div className='cart-product__info'>
-                  <Link
-                    href={`/products/${value.id}`}
-                  >
-                    <a>
-                      <span className='product__element product__name'>{value.name}</span>
-                    </a>
-                  </Link>
-                  <span className='product__element product__price'>${value.price}</span>
-                  <span className='product__element product__quantity'>{cartIds[index].q}</span>
-                </div>
-              </ul>
+              <CartProduct
+                image={value.images[0]}
+                name={value.name}
+                price={value.price}
+                quantity={cartIds[index].q}
+                productId={cartIds[index].id}
+              />
               )
             })
           }
-        </div>
+        </ul>
       </>
       }
       {!isLoaded&&
