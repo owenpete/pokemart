@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { addCart } from '../utils/cart';
+import { addCart, removeCart } from '../utils/cart';
 import { maxProductLimit } from '../constants/maxProductLimit';
 
 import { FiChevronDown } from 'react-icons/fi';
@@ -53,13 +53,14 @@ const CartProduct = (props: Props) =>{
               className='cart-product__quantity-select'
               onChange={(e)=>{
                 setQuantity(parseInt(e.target.value));
-                addCart(props.productId, parseInt(e.target.value), 'set');
+                e.target.value=='0'?removeCart(props.productId) : addCart(props.productId, parseInt(e.target.value), 'set');
               }}
             >
+              <option value={0}>0</option>
               {
                 [...Array(maxProductLimit)].map((value: any, index: number)=>{
                   return (
-                    <option value={index+1}>
+                    <option selected={index==quantity} value={index+1}>
                       {index+1}
                     </option>
                   );

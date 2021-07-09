@@ -21,8 +21,10 @@ useEffect(()=>{
         ids: ids
       }
     });
-  setCart(data.data.data);
-  setCartIds(Object.values(ids));
+  if(data.data.data){
+    setCart(data.data.data);
+    setCartIds(Object.values(ids));
+  }
   setIsLoaded(true);
   })();
 }, [])
@@ -34,10 +36,10 @@ return (
   <div className='cart'>
     <Navbar />
     <SubNav />
-    {isLoaded&&
+    {isLoaded&&cart&&
     <>
       <ul className='cart__list'>
-        {cart&&
+        {
           cart.map((value: any, index: number)=>{
             return(
               <CartProduct

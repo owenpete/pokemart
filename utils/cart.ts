@@ -31,8 +31,13 @@ export const addCart = (productId: string, numberOfItems: number, method: 'set' 
 
 export const removeCart = (productId: string) =>{
   try{
-    const cart: any[] = getCart();
-    window.localStorage.setItem('cart', JSON.stringify([...cart].splice(cart.indexOf(productId), 1)));
+    let cart: any = getCart();
+    delete cart[productId];
+    if(cart=={}){
+      window.localStorage.removeItem('cart');
+    }else{
+      window.localStorage.setItem('cart', JSON.stringify({...cart}));
+    }
     window.dispatchEvent( new Event('storage') );
   }catch(err: any){
     console.log(err)

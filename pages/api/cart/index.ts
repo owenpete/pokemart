@@ -17,18 +17,22 @@ const sortData = (products, ids: any) =>{
 
 export default async function (req: any, res: any) {
   //product ids from localStorage
-  const ids = JSON.parse(req.query.ids);
-  try {
-    const db = await connectStore();
-    const product = db.model("Product", ProductSchema);
-    //finding products in database that match localStorage ids
-    const data = await product
-      .where("id")
-      .in(Object.values(ids).map((value: any) => value.id));
-    const sortedData = sortData(data, ids);
-    res.status(200).json({ data: sortedData});
-  } catch (err: any) {
-    console.log(err);
-    res.status(500).json({ err: err });
+  if(req.query.ids){
+    const ids = JSON.parse(req.query.ids);
+    try {
+      const db = await connectStore();
+      const product = db.model("Product", ProductSchema);
+      //finding products in database that match localStorage ids
+      const data = await product
+        .where("id")
+        .in(Object.values(ids).map((value: any) => value.id));
+      const sortedData = sortData(data, ids);
+      res.status(200).json({ data: sortedData});
+    } catch (err: any) {
+      console.log(err);
+      res.status(500).json({ err: err });
+    }
+  }else{
+    res.status(200).json({data: null});
   }
 }
