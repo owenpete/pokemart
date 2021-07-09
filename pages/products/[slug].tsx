@@ -133,7 +133,7 @@ const Product = (props: Props) =>{
               className='info__element info__add-to-cart-button'
               type='button'
               value='Add to cart'
-              onClick={()=>{addCart(props.product.id)}}
+              onClick={()=>{addCart(props.product.id, dropdown)}}
             />
             <input
               className='info__element info__buy-it-now-button'

@@ -7,11 +7,15 @@ export const getCart = () =>{
   }
 }
 
-export const addCart = (productId: string, numberOfItems?: number) =>{
+export const addCart = (productId: string, numberOfItems: number, method: 'set' | 'add'='add') =>{
   try{
     let cart: any = getCart() || {};
     if(cart[productId]){
-      cart[productId] = {...cart[productId], q: cart[productId].q = numberOfItems || cart[productId].q+1 }
+      if(method == 'set'){
+        cart[productId] = {...cart[productId], q: cart[productId].q = numberOfItems }
+      }else if(method == 'add'){
+        cart[productId] = {...cart[productId], q: cart[productId].q += numberOfItems }
+      }
       window.localStorage.setItem('cart', JSON.stringify({...cart}));
     }else{
       cart[productId] = { id: productId, q: 1 };

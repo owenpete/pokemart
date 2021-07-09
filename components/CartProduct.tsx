@@ -50,7 +50,10 @@ const CartProduct = (props: Props) =>{
             />
             <select
               className='cart-product__quantity-select'
-              onChange={(e)=>{setQuantity(parseInt(e.target.value));addCart(props.productId, parseInt(e.target.value));}}
+              onChange={(e)=>{
+                setQuantity(parseInt(e.target.value));
+                addCart(props.productId, parseInt(e.target.value), 'set');
+              }}
             >
               {
                 [...Array(99)].map((value: any, index: number)=>{
