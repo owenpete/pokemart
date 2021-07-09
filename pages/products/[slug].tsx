@@ -11,6 +11,7 @@ import { FiChevronDown } from 'react-icons/fi';
 import localInstance from '../../services/api/localInstance';
 import { Carousel } from 'react-responsive-carousel';
 import ReactStars from "react-rating-stars-component";
+import { maxProductLimit } from '../../constants/maxProductLimit';
 
 import { addCart } from '../../utils/cart';
 
@@ -117,7 +118,7 @@ const Product = (props: Props) =>{
               value={dropdown}
             >
               {
-                [...Array(99)].map((value, index: number)=>{
+                [...Array(maxProductLimit)].map((value, index: number)=>{
                   return (
                     <option value={index+1} key={Math.random()}>{index+1}</option>
                   );

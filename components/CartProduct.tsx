@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { addCart } from '../utils/cart';
+import { maxProductLimit } from '../constants/maxProductLimit';
 
 import { FiChevronDown } from 'react-icons/fi';
 
@@ -56,7 +57,7 @@ const CartProduct = (props: Props) =>{
               }}
             >
               {
-                [...Array(99)].map((value: any, index: number)=>{
+                [...Array(maxProductLimit)].map((value: any, index: number)=>{
                   return (
                     <option value={index+1}>
                       {index+1}
