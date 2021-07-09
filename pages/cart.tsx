@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import SubNav from '../components/SubNav';
 
 import { getCart } from '../utils/cart';
+import localInstance from '../services/api/localInstance';
 
 import axios from 'axios';
 
@@ -13,35 +14,52 @@ interface Props{
 }
 
 export default function Cart(props: Props){
-  useEffect(()=>{
-    (async() =>{
-      const ids = getCart();
-      const data = await axios.get('http://localhost:3000/api/cart', {
-        params: {
-          ids: ids
-        }
-      });
-    setCart(data.data.data);
-    setIsLoaded(true);
-    console.log(JSON.parse(window.localStorage.getItem('cart')))
-    })();
-  }, [])
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [cart, setCart] = useState<any>();
+useEffect(()=>{
+  (async() =>{
+    const ids = getCart();
+    const data = await localInstance.get('/cart', {
+      params: {
+        ids: ids
+      }
+    });
+  setCart(data.data.data);
+  setCartIds(Object.values(ids));
+  setIsLoaded(true);
+  })();
+}, [])
+const [isLoaded, setIsLoaded] = useState<boolean>(false);
+const [cart, setCart] = useState<any>();
+const [cartIds, setCartIds] = useState<any>();
 
-  return (
-    <div className='cart'>
-      <Navbar />
-      <SubNav />
-      {isLoaded&&
-      <>
-        <div className='cart__list'>
-          {cart&&
-            cart.map((value: any)=>{
-              return(
-                <ul className='cart__element' key={Math.random()}>
-                  {value.name}
-                </ul>
+return (
+  <div className='cart'>
+    <Navbar />
+    <SubNav />
+    {isLoaded&&
+    <>
+      <div className='cart__list'>
+        {cart&&
+          cart.map((value: any, index: number)=>{
+            return(
+              <ul className='cart__product' key={Math.random()}>
+                <Image
+                  src={value.images[0]}
+                  height={150}
+                  width={150}
+                  quality={100}
+                />
+                <div className='cart-product__info'>
+                  <Link
+                    href={`/products/${value.id}`}
+                  >
+                    <a>
+                      <span className='product__element product__name'>{value.name}</span>
+                    </a>
+                  </Link>
+                  <span className='product__element product__price'>${value.price}</span>
+                  <span className='product__element product__quantity'>{cartIds[index].q}</span>
+                </div>
+              </ul>
               )
             })
           }

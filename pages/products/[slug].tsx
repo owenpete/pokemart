@@ -8,7 +8,7 @@ import SubNav from '../../components/SubNav';
 
 import { FiChevronDown } from 'react-icons/fi';
 
-import axios from 'axios';
+import localInstance from '../../services/api/localInstance';
 import { Carousel } from 'react-responsive-carousel';
 import ReactStars from "react-rating-stars-component";
 
@@ -37,7 +37,7 @@ const renderThumbs = (children: any[], imgArr: string[]) => {
 
 export async function getServerSideProps({query}){
   const { slug } = query;
-  const res = await axios.get('http://localhost:3000/api/products/getData',{
+  const res = await localInstance.get('http://localhost:3000/api/products/getData',{
     params: {
       searchField:
         {id: slug}

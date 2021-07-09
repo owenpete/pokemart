@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import localInstance from '../services/api/localInstance';
 
 import Navbar from "../components/Navbar";
 import SubNav from "../components/SubNav";
@@ -16,31 +17,30 @@ interface Props {
   products: any;
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context: any) {
   let slides: any = [];
   let products: any = [];
-  try {
-    const response = await axios.get(`http://localhost:3000/api/home/slides`);
-    slides = await response.data.data;
-  } catch (err: any) {
-    console.log(err);
-  }
-  try {
-    const response = await axios.get("http://localhost:3000/api/products", {
+  try{
+    const slide = await localInstance.get(`/home/slides`);
+    slides = await slide.data.data;
+    const response = await localInstance.get("http://localhost:3000/api/products", {
       params: {
         limit: 15,
       },
     });
     products = await response.data.data;
-  } catch (err: any) {
-    console.log(err);
+    return {
+      props: {
+        slides: slides,
+        products: products,
+      },
+    };
+  }catch(err: any){
+    return {
+      props: {
+      }
+    }
   }
-  return {
-    props: {
-      slides: slides,
-      products: products,
-    },
-  };
 }
 
 export default function Home(props: Props) {

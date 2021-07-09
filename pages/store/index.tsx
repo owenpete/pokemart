@@ -9,7 +9,7 @@ import PageSelector from '../../components/PageSelector';
 
 import { FiChevronDown }from 'react-icons/fi';
 
-import axios from 'axios';
+import localInstance from '../../services/api/localInstance';
 
 interface Props{
   products: any;
@@ -20,7 +20,7 @@ interface Props{
 }
 
 export async function getServerSideProps({query}){
-  const response = await axios.get('http://localhost:3000/api/products', {
+  const response = await localInstance.get('http://localhost:3000/api/products', {
     params: {
       //!
       skip: query.r*(query.page-1) || 8*(query.page-1),
