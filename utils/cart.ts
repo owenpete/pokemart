@@ -33,7 +33,7 @@ export const removeCart = (productId: string) =>{
   try{
     let cart: any = getCart();
     delete cart[productId];
-    if(cart=={}){
+    if(!Object.values(cart).length){
       window.localStorage.removeItem('cart');
     }else{
       window.localStorage.setItem('cart', JSON.stringify({...cart}));
