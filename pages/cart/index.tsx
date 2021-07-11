@@ -48,7 +48,7 @@ return (
           Subtotal ({getCartSize(cartIds)} items): <span className='subtotal__total'>${getTotalValue(cart, cartIds)}</span>
         </span>
         <Link
-          href='/checkout'
+          href='/cart/checkout'
         >
           <button
             className='summary-bar__checkout'
