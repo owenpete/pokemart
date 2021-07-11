@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Navbar from '../components/Navbar';
-import SubNav from '../components/SubNav';
-import CartProduct from '../components/CartProduct';
+import Navbar from '../../components/Navbar';
+import SubNav from '../../components/SubNav';
+import CartProduct from '../../components/CartProduct';
 
-import { getCart } from '../utils/cart';
-import localInstance from '../services/api/localInstance';
-import getCartSize from '../utils/getCartSize';
-import getTotalValue from '../utils/getTotalValue';
+import { getCart } from '../../utils/cart';
+import localInstance from '../../services/api/localInstance';
+import getCartSize from '../../utils/getCartSize';
+import getTotalValue from '../../utils/getTotalValue';
 
 interface Props{
   cart: any;
