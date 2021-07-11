@@ -15,7 +15,7 @@ async function connectStore(){
     });
     connection.isConnected = db.readyState;
     connection.db = db;
-    console.log('!connected: '+connection.isConnected)
+    console.log('not connected: '+connection.isConnected)
     return db;
 }
 

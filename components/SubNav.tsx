@@ -7,12 +7,32 @@ export default function SubNav(){
       <ul className='subnav__list'>
         <li className='subnav__item'>
           <Link href='/store'>
-            <a>Shop</a>
+            <a>Shop All</a>
+          </Link>
+        </li>
+        <li className='subnav__item'>
+          <Link href='/store'>
+            <a>Best Sellers</a>
           </Link>
         </li>
         <li className='subnav__item'>
           <Link href='/store'>
             <a>On Sale</a>
+          </Link>
+        </li>
+        <li className='subnav__item'>
+          <Link href='/store'>
+            <a>Sports And Outdoors</a>
+          </Link>
+        </li>
+        <li className='subnav__item'>
+          <Link href='/store'>
+            <a>Health And Wellness</a>
+          </Link>
+        </li>
+        <li className='subnav__item'>
+          <Link href='/store'>
+            <a>Tech</a>
           </Link>
         </li>
       </ul>

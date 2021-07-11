@@ -6,6 +6,7 @@ import { FiMenu, FiShoppingCart, FiChevronDown } from 'react-icons/fi';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 import { getCart, addCart } from '../utils/cart';
+import getCartSize from '../utils/getCartSize';
 
 export default function Navbar(){
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
@@ -107,7 +108,7 @@ export default function Navbar(){
             {cart&&
               <span className='nav__cart-size'>
                 {
-                  Object.entries(cart).map((value: any)=>{return(value[1].q);}).reduce((total: number, value: number)=>total+=value)
+                  getCartSize(cart)
                 }
               </span>
             }

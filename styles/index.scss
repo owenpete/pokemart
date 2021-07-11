@@ -29,9 +29,9 @@
   margin: 25px 4%;
   padding: 4%;
   height: auto;
-  background-color: var(--brandRedLight);
+  background-color: var(--green);
   border-radius: 5px;
-  box-shadow: 10px 5px 5px hsl(180, 45%, 83%);
+  box-shadow: 10px 5px 5px var(--blueShadow);
 }
 
 .product-section__grid{

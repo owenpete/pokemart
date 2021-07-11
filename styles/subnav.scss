@@ -1,20 +1,22 @@
 @import './_themes.scss';
 
 .subnav{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    background-color: var(--brandBlue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 40px;
+  background-color: var(--brandBlue);
 }
 .subnav__list{
   margin: 0;
   padding: 0;
   .subnav__item{
     display: inline-block;
-    margin: 25px;
     a{
-      font-size: 22px;
+      font-size: 18px;
+      padding: 10px 25px;
+      letter-spacing: 1.2px;
       color: white;
       &:hover{
         color: var(--brandRedLight);

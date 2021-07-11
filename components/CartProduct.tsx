@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { addCart, removeCart } from '../utils/cart';
 import { maxProductLimit } from '../constants/maxProductLimit';
@@ -13,6 +14,8 @@ interface Props{
   price: number;
   quantity: number;
   productId: string;
+  rerender: any;
+  value: boolean;
 }
 
 const CartProduct = (props: Props) =>{
@@ -21,7 +24,6 @@ const CartProduct = (props: Props) =>{
   useEffect(()=>{
     setQuantity(props.quantity);
   },[]);
-
   return (
     <>
       <li className='cart-product'>
@@ -53,14 +55,19 @@ const CartProduct = (props: Props) =>{
               className='cart-product__quantity-select'
               onChange={(e)=>{
                 setQuantity(parseInt(e.target.value));
-                e.target.value=='0'?removeCart(props.productId) : addCart(props.productId, parseInt(e.target.value), 'set');
+                if(e.target.value=='0'){
+                  removeCart(props.productId);
+                }else{
+                 addCart(props.productId, parseInt(e.target.value), 'set')
+                }
+                props.rerender(!props.value);
               }}
             >
-              <option value={0}>0</option>
+              <option value={0}>0 (remove)</option>
               {
                 [...Array(maxProductLimit)].map((value: any, index: number)=>{
                   return (
-                    <option selected={index==quantity} value={index+1}>
+                    <option selected={index+1==quantity} value={index+1}>
                       {index+1}
                     </option>
                   );

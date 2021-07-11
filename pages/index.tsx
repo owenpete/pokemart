@@ -24,12 +24,12 @@ export async function getServerSideProps(context: any) {
   try{
     const slide = await localInstance.get(`/home/slides`);
     slides = await slide.data.data;
-    const response = await localInstance.get("http://localhost:3000/api/products", {
+    const data = await localInstance.get("http://localhost:3000/api/products", {
       params: {
         limit: 15,
       },
     });
-    products = await response.data.data;
+    products = await data.data.data;
     return {
       props: {
         slides: slides,
@@ -65,7 +65,7 @@ export default function Home(props: Props) {
       </div>
       <div className="index__product-section">
         <div className="product-section__grid">
-          {props.products.slice(0, 15).map((value: any) => {
+          {props.products.map((value: any) => {
             return (
               <div
                 className="product-section__product"
@@ -78,7 +78,7 @@ export default function Home(props: Props) {
                     height: 150,
                   }}
                 >
-                  <Link href="/store">
+                  <Link href={`/products/${value.id}`}>
                     <a>
                       <Image
                         src={value.images[0]}
@@ -98,7 +98,7 @@ export default function Home(props: Props) {
                     edit={false}
                     size={28}
                   />
-                  <Link href="/store">
+                  <Link href={`/products/${value.id}`}>
                     <a className="info__name info__element">{value.name}</a>
                   </Link>
                   <span className="info__price info__element">
