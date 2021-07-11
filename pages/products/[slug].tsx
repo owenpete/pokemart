@@ -52,7 +52,7 @@ export async function getServerSideProps({query}){
   }
 }
 
-const Product = (props: Props) =>{
+export default function Products(props: Props){
   const [dropdown, setDropdown] = useState(1);
 
   return (
@@ -147,6 +147,3 @@ const Product = (props: Props) =>{
     </div>
   );
 }
-
-
-export default Product;
