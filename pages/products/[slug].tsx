@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Navbar from '../../components/Navbar';
 import SubNav from '../../components/SubNav';
@@ -53,7 +54,7 @@ export async function getServerSideProps({query}){
 }
 
 export default function Products(props: Props){
-  const [dropdown, setDropdown] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className='product'>
@@ -109,13 +110,13 @@ export default function Products(props: Props){
           <span className='info__element info__price'>${props.product.price}</span>
           <label className='info__element quantity__label'>Quantity: </label>
           <div className='info__quantity'>
-            <input className='quantity__dropdown-button' value={dropdown} type='button' />
+            <input className='quantity__dropdown-button' value={quantity} type='button' />
             <FiChevronDown className='quantity__dropdown-arrow' />
             <select
               name='catagories'
               className='quantity__dropdown'
-              onChange={(e)=>{setDropdown(parseInt(e.target.value))}}
-              value={dropdown}
+              onChange={(e)=>{setQuantity(parseInt(e.target.value))}}
+              value={quantity}
             >
               {
                 [...Array(maxProductLimit)].map((value, index: number)=>{
@@ -134,13 +135,25 @@ export default function Products(props: Props){
               className='info__element info__add-to-cart-button'
               type='button'
               value='Add to cart'
-              onClick={()=>{addCart(props.product.id, dropdown)}}
+              onClick={()=>{addCart(props.product.id, quantity)}}
             />
-            <input
-              className='info__element info__buy-it-now-button'
-              type='button'
-              value='Buy it now'
-            />
+            <Link
+              href={{
+                pathname: '/checkout/bin',
+                query: {
+                  id: props.product.id,
+                  qty: quantity
+                }
+              }}
+            >
+              <a>
+                <input
+                  className='info__element info__buy-it-now-button'
+                  type='button'
+                  value='Buy it now'
+                />
+              </a>
+            </Link>
           </div>
         </div>
       </div>
