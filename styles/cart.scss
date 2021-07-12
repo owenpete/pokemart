@@ -75,25 +75,3 @@
   }
 }
 
-.cart__loading{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 8rem;
-  animation: loading 1500ms ease-in-out infinite normal;
-
-  @keyframes loading{
-    0%{
-      transform: rotateZ(0deg);
-    }
-    35%{
-      transform: rotateZ(375deg);
-    }
-    50%{
-      transform: rotateZ(360deg);
-    }
-    100%{
-      transform: rotateZ(360deg);
-    }
-  }
-}

@@ -1,0 +1,112 @@
+@import '_themes.scss';
+
+.checkout__summary{
+  padding: 1rem 2rem;
+  background-color: var(--green);
+  border-radius: 5px;
+  width: 100%;
+  margin-right: 1.5rem;
+  &--empty{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 8rem;
+    span{
+      font-size: 26px;
+    }
+    .summary__button--empty{
+      margin-top: 2rem;
+      height: 40px;
+      width: 200px;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--brandRedLight);
+      &:hover{
+        background-color: var(--brandRed);
+      }
+      &:active{
+        background-color: var(--brandRedDark);
+      }
+    }
+  }
+}
+
+.checkout__container{
+  display: flex;
+  flex-direction: row;
+  margin: 4rem;
+}
+
+.summary__list{
+  list-style: none;
+  padding: 0;
+}
+
+.summary__total{
+  display: flex;
+  justify-content: center;
+  span{
+    font-size: 28px;
+  }
+}
+
+.summary__item{
+  display: flex;
+  align-items: center;
+  positon: relative;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.summary__info{
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
+  height: 100%;
+  span{
+    font-size: 21px;
+    margin: 2px;
+    display: inline-block;
+  }
+  .summary__quantity{
+    color: var(--brandBlue);
+  }
+}
+
+.summary__confirm{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 360px;
+  height: fit-content;
+  border-radius: 5px;
+  background-color: var(--creamYellow);
+  padding: 2rem;
+  span{
+    font-size: 24px;
+    margin: 0.2rem;
+  }
+  .summary__price{
+    float: right;
+  }
+  .summary__checkout-button{
+    height: 40px;
+    width: 100%;
+    color: black;
+    margin-top: 1.5rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--offWhite);
+    transition: all ease-in-out 150ms;
+    &:hover{
+      background-color: white;
+    }
+    &:active{
+      background-color: var(--offWhite);
+    }
+  }
+}

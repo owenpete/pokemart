@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import SubNav from '../../components/SubNav';
 import CartProduct from '../../components/CartProduct';
+import Loading from '../../components/Loading';
 
 import { getCart } from '../../utils/cart';
 import localInstance from '../../services/api/localInstance';
@@ -15,10 +16,10 @@ interface Props{
 }
 
 export default function Cart(props: Props){
-const [isLoaded, setIsLoaded] = useState<boolean>(false);
 const [cart, setCart] = useState<any>();
 const [cartIds, setCartIds] = useState<any>();
 const [rerender, setRerender] = useState<boolean>(true);
+const [isLoaded, setIsLoaded] = useState<boolean>(false);
 useEffect(()=>{
   setIsLoaded(false);
   setCart(undefined);
@@ -48,7 +49,7 @@ return (
           Subtotal ({getCartSize(cartIds)} items): <span className='subtotal__total'>${getTotalValue(cart, cartIds)}</span>
         </span>
         <Link
-          href='/cart/checkout'
+          href='/checkout/cart'
         >
           <button
             className='summary-bar__checkout'
@@ -70,6 +71,7 @@ return (
                 productId={cartIds[index].id}
                 rerender={setRerender}
                 value={rerender}
+                key={value._id}
               />
               )
             })
@@ -97,13 +99,7 @@ return (
         </div>
       }
       {!isLoaded&&
-        <div className='cart__loading'>
-          <Image
-            src='/ballLogo.png'
-            height={50}
-            width={50}
-          />
-        </div>
+        <Loading />
       }
     </div>
   );

@@ -53,6 +53,7 @@ const CartProduct = (props: Props) =>{
             />
             <select
               className='cart-product__quantity-select'
+              value={quantity}
               onChange={(e)=>{
                 setQuantity(parseInt(e.target.value));
                 if(e.target.value=='0'){
@@ -67,7 +68,7 @@ const CartProduct = (props: Props) =>{
               {
                 [...Array(maxProductLimit)].map((value: any, index: number)=>{
                   return (
-                    <option selected={index+1==quantity} value={index+1}>
+                    <option value={index+1} key={new Date().getTime()*index}>
                       {index+1}
                     </option>
                   );

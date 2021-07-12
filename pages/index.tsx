@@ -69,7 +69,7 @@ export default function Home(props: Props) {
             return (
               <div
                 className="product-section__product"
-                key={Math.random() * new Date().getSeconds()}
+                key={value._id}
               >
                 <div
                   style={{
