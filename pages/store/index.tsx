@@ -57,12 +57,6 @@ const getPageCount = (itemCount: number, resPerPage: number) =>{
 }
 
 export default function Store(props: Props){
-  useEffect(()=>{
-    if(props.query.f){
-      setFilter(filterCategories[filterCategories.findIndex(value=>props.query.f==value.filter)].name)
-    }
-  }, [props.query.f]);
-
   const filterCategories = [
     {
       name:'Featured',
@@ -88,7 +82,14 @@ export default function Store(props: Props){
 
   const [pageNumber, setPageNumber] = useState<number>(props.page);
   const [resPerPage, setResPerPage] = useState<any>(props.resPerPage);
-  const [filter, setFilter] = useState<any>(filterCategories[0].name);
+  const [filter, setFilter] = useState<any>(props.query.f || filterCategories[0].name);
+  useEffect(()=>{
+    if(props.query.f){
+      setFilter(filterCategories[filterCategories.findIndex(value=>props.query.f==value.filter)].name)
+    }else{
+      setFilter(filterCategories[0].name);
+    }
+  }, [props.query.f]);
 
   const handleFilter = (filter: string) =>{
     router.push({
