@@ -18,6 +18,7 @@ export default function PageSelector(props: Props) {
   return (
     <div className="selector">
       <ul className="selector__container">
+        {/*To first page*/}
         <Link
           href={{
             pathname: "/store",
@@ -31,12 +32,13 @@ export default function PageSelector(props: Props) {
             <FiChevronsLeft className="selector__action" />
           </a>
         </Link>
+        {/*Back one page*/}
         <Link
           href={{
             pathname: "/store",
             query: {
               ...props.query,
-              page: parseInt(props.query.page) - 1 || 1,
+              page: props.query.page - 1 || 1,
             },
           }}
         >
@@ -44,6 +46,7 @@ export default function PageSelector(props: Props) {
             <FiChevronLeft className="selector__action" />
           </a>
         </Link>
+        {/*Page numbers*/}
         {[...Array(props.pageCount)].map((value: any, index: number) => {
           return (
             <Link
@@ -62,6 +65,7 @@ export default function PageSelector(props: Props) {
             </Link>
           );
         })}
+        {/*Forward one page*/}
         <Link
           href={{
             pathname: "/store",
@@ -78,6 +82,7 @@ export default function PageSelector(props: Props) {
             <FiChevronRight className="selector__action" />
           </a>
         </Link>
+        {/*To last page*/}
         <Link
           href={{
             pathname: "/store",

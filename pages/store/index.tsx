@@ -20,25 +20,34 @@ interface Props{
 }
 
 export async function getServerSideProps({query}){
-  const response = await localInstance.get('/products', {
+  // setting query params
+  query={
+    ...query,
+    // if there is no query set query to null
+    q: query.q || null,
+    // if page is undefined set it to the first page
+    page: query.page || 1
+  }
+
+  const productList = await localInstance.get('/products', {
     params: {
-      //!
-      skip: query.r*(query.page-1) || 8*(query.page-1),
-      //!
-      limit: query.r || 8,
-      q: query.q || null,
-      page: query.page || 1,
-      f: query.f,
+      // how many items to skip based on page number
+      skip: 8*(query.page-1),
+      // limit to 8 results per page
+      limit: 8,
+      ...query
     }
   });
-  const data = await response.data;
+  const productListData = await productList.data;
   return {
     props: {
-      products: data.data,
-      totalResults: data.totalResults,
-      resPerPage: data.query.limit,
-      page: data.query.page,
-      query
+      products: productListData.data,
+      totalResults: productListData.totalResults,
+      resPerPage: productListData.query.limit,
+      page: productListData.query.page,
+      query: {
+        ...query,
+      }
     },
   }
 }
@@ -53,8 +62,6 @@ export default function Store(props: Props){
       setFilter(filterCategories[filterCategories.findIndex(value=>props.query.f==value.filter)].name)
     }
   }, [props.query.f]);
-  //!
-  const resultOptions = [16, 32, 64, 128];
 
   const filterCategories = [
     {
@@ -80,7 +87,7 @@ export default function Store(props: Props){
   ];
 
   const [pageNumber, setPageNumber] = useState<number>(props.page);
-  const [resPerPage, setResPerPage] = useState<any>(props.resPerPage || resultOptions[0]);
+  const [resPerPage, setResPerPage] = useState<any>(props.resPerPage);
   const [filter, setFilter] = useState<any>(filterCategories[0].name);
 
   const handleFilter = (filter: string) =>{
