@@ -14,13 +14,22 @@ export const addCart = (productId: string, numberOfItems: number, method: 'set' 
     let cart: any = getCart() || {};
     if(cart[productId]){
       if(method == 'set'){
-        cart[productId] = {...cart[productId], q: cart[productId].q = numberOfItems }
+        cart[productId] = {
+          ...cart[productId],
+          qty: cart[productId].qty = numberOfItems
+        }
       }else if(method == 'add'){
-        cart[productId] = {...cart[productId], q: cart[productId].q+numberOfItems>=maxProductLimit? cart[productId].q=maxProductLimit: cart[productId].q += numberOfItems }
+        cart[productId] = {
+          ...cart[productId],
+          qty: cart[productId].qty + numberOfItems>=maxProductLimit? cart[productId].qty = maxProductLimit : cart[productId].qty += numberOfItems
+        }
       }
       window.localStorage.setItem('cart', JSON.stringify({...cart}));
     }else{
-      cart[productId] = { id: productId, q: numberOfItems };
+      cart[productId] = {
+        productId: productId,
+        qty: numberOfItems
+      };
       window.localStorage.setItem('cart', JSON.stringify({...cart}));
     }
     window.dispatchEvent( new Event('storage') );

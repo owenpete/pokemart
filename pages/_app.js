@@ -19,6 +19,7 @@ import '../styles/loading.scss';
 import '../styles/cart.scss';
 import '../styles/cartProduct.scss';
 import '../styles/checkout.scss';
+import '../styles/orders.scss';
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());

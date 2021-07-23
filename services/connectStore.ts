@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const connection = <{isConnected: number, db: any}>{};
 
+//established a connection with the "store" datbase
 async function connectStore(){
   console.log("\nStore:");
   console.log('pre: '+connection.isConnected)

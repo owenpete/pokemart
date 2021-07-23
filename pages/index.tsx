@@ -21,35 +21,30 @@ interface Props {
 export async function getServerSideProps(context: any) {
   let slides: any = [];
   let products: any = [];
-  try{
-    const slide = await localInstance.get(`/home/slides`);
-    slides = await slide.data.data;
-    const data = await localInstance.get("http://localhost:3000/api/products", {
-      params: {
-        limit: 15,
-      },
-    });
-    products = await data.data.data;
-    return {
-      props: {
-        slides: slides,
-        products: products,
-      },
-    };
-  }catch(err: any){
-    return {
-      props: {
-      }
-    }
-  }
+  const slide = await localInstance.get(`/home/getCarouselSlides`);
+  slides = await slide.data.data;
+  const data = await localInstance.get("/products", {
+    params: {
+      limit: 15,
+    },
+  });
+  products = await data.data.data;
+  return {
+    props: {
+      slides: slides,
+      products: products,
+    },
+  };
 }
 
 export default function Home(props: Props) {
+  useEffect(()=>{
+  });
   //this funcion toggles the state of the sideCart component
   return (
     <div className="index">
       <Head>
-        <title>Pokémart</title>
+        <title>Home | Pokémart</title>
         <link rel="icon" href="/ballLogo.png" />
       </Head>
       <Navbar
@@ -78,7 +73,7 @@ export default function Home(props: Props) {
                     height: 150,
                   }}
                 >
-                  <Link href={`/products/${value.id}`}>
+                  <Link href={`/products/${value.productId}`}>
                     <a>
                       <Image
                         src={value.images[0]}
@@ -98,7 +93,7 @@ export default function Home(props: Props) {
                     edit={false}
                     size={28}
                   />
-                  <Link href={`/products/${value.id}`}>
+                  <Link href={`/products/${value.productId}`}>
                     <a className="info__name info__element">{value.name}</a>
                   </Link>
                   <span className="info__price info__element">

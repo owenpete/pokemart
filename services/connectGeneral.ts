@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const connection = <{isConnected: number, db: any}>{};
 
+//established a connection with the "general" database
 async function connectGeneral(){
   console.log("\nGeneral:")
   console.log("pre: "+connection.isConnected)

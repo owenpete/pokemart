@@ -1,6 +1,7 @@
-import connectStore from "../../services/connectStore";
-import ProductSchema from "../../schemas/ProductSchema";
+import connectStore from "../../../services/connectStore";
+import ProductSchema from "../../../schemas/ProductSchema";
 
+// fetches all product data matching the query params
 export default async function (req: any, res: any) {
   const db = await connectStore();
 

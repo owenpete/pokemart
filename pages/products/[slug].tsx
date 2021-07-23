@@ -14,7 +14,7 @@ import { Carousel } from 'react-responsive-carousel';
 import ReactStars from "react-rating-stars-component";
 import { maxProductLimit } from '../../constants/maxProductLimit';
 
-import { addCart } from '../../utils/cart';
+import { addCart } from '../../utils/cartOps';
 
 interface Props{
   product: any;
@@ -39,10 +39,10 @@ const renderThumbs = (children: any[], imgArr: string[]) => {
 
 export async function getServerSideProps({query}){
   const { slug } = query;
-  const res = await localInstance.get('http://localhost:3000/api/products/getData',{
+  const res = await localInstance.get('/products/getOne',{
     params: {
       searchField:
-        {id: slug}
+        {productId: slug}
     }
   });
   const product = await res.data.data[0];
@@ -135,13 +135,13 @@ export default function Products(props: Props){
               className='info__element info__add-to-cart-button'
               type='button'
               value='Add to cart'
-              onClick={()=>{addCart(props.product.id, quantity)}}
+              onClick={()=>{addCart(props.product.productId, quantity)}}
             />
             <Link
               href={{
                 pathname: '/checkout/bin',
                 query: {
-                  id: props.product.id,
+                  productId: props.product.productId,
                   qty: quantity
                 }
               }}

@@ -1,8 +1,16 @@
-// returns the total value of a set of items
+interface Product{
+  productId: string;
+  price: number;
+}
 
-const getTotalValue = (products: [{ id: string, price: number }], quantities: [{ id: string; q: number }]) =>{
+interface Quantity{
+  productId: string;
+  qty: number;
+}
+
+const getTotalValue = (products: [Product], quantities: [Quantity]) =>{
   const total = products.map((value: any, index: number)=>{
-    return value.price * quantities[index].q
+    return value.price * quantities[index].qty
   }).reduce((total: number, value: number)=>{
     return total+value;
   });

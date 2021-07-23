@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { addCart, removeCart } from '../utils/cart';
+import { addCart, removeCart } from '../utils/cartOps';
 import { maxProductLimit } from '../constants/maxProductLimit';
 
 import { FiChevronDown } from 'react-icons/fi';

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-import { getCart }from '../utils/cart';
+import { getCart }from '../utils/cartOps';
 import updateCartState from '../utils/toggleCart';
 import axios from 'axios';
 

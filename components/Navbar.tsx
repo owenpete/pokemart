@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { FiMenu, FiShoppingCart, FiChevronDown } from 'react-icons/fi';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-import { getCart, addCart } from '../utils/cart';
+import { getCart, addCart } from '../utils/cartOps';
 import getCartSize from '../utils/getCartSize';
 
 export default function Navbar(){

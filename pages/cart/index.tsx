@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
@@ -6,10 +7,11 @@ import SubNav from '../../components/SubNav';
 import CartProduct from '../../components/CartProduct';
 import Loading from '../../components/Loading';
 
-import { getCart } from '../../utils/cart';
+import { getCart } from '../../utils/cartOps';
 import localInstance from '../../services/api/localInstance';
 import getCartSize from '../../utils/getCartSize';
 import getTotalValue from '../../utils/getTotalValue';
+import axios from 'axios'
 
 interface Props{
   cart: any;
@@ -25,13 +27,13 @@ useEffect(()=>{
   setCart(undefined);
   (async() =>{
     const ids = getCart();
-    const data = await localInstance.get('/cart', {
+    const data = await localInstance.get('products/getMany', {
       params: {
-        ids: ids
+        productIds: ids
       }
     });
-  if(data.data.data){
-    setCart(data.data.data);
+  if(data.data){
+    setCart(data.data);
     setCartIds(Object.values(ids));
   }
   setIsLoaded(true);
@@ -40,6 +42,10 @@ useEffect(()=>{
 
 return (
   <div className='cart'>
+    <Head>
+      <title>Your Cart | Pokemart</title>
+      <link rel="icon" href="/ballLogo.png" />
+    </Head>
     <Navbar />
     <SubNav />
     {isLoaded&&cart&&
@@ -67,8 +73,8 @@ return (
                 image={value.images[0]}
                 name={value.name}
                 price={value.price}
-                quantity={cartIds[index].q}
-                productId={cartIds[index].id}
+                quantity={cartIds[index].qty}
+                productId={cartIds[index].productId}
                 rerender={setRerender}
                 value={rerender}
                 key={value._id}

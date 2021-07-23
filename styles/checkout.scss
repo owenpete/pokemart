@@ -92,21 +92,55 @@
   .summary__price{
     float: right;
   }
+}
+
+.checkout-button__container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 1.5rem;
   .summary__checkout-button{
-    height: 40px;
+    font-size: 23px;
+    height: 50px;
     width: 100%;
     color: black;
-    margin-top: 1.5rem;
     outline: none;
     border: none;
     border-radius: 5px;
     background-color: var(--offWhite);
     transition: all ease-in-out 150ms;
+    overflow: hidden;
     &:hover{
       background-color: white;
     }
     &:active{
       background-color: var(--offWhite);
     }
+    &:disabled{
+      background-color: hsl(0, 0%, 90%);
+    }
+  }
+}
+
+.checkout-button__loading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  animation: loading 1500ms ease-in-out infinite normal;
+}
+@keyframes loading{
+  0%{
+    transform: rotateZ(0deg);
+  }
+  35%{
+    transform: rotateZ(375deg);
+  }
+  50%{
+    transform: rotateZ(360deg);
+  }
+  100%{
+    transform: rotateZ(360deg);
   }
 }

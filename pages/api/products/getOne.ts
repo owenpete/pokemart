@@ -1,6 +1,7 @@
 import connectStore from "../../../services/connectStore";
 import ProductSchema from "../../../schemas/ProductSchema";
 
+// fetches product from database via "id"
 export default async function (req: any, res: any) {
   const db = await connectStore();
 
@@ -10,9 +11,7 @@ export default async function (req: any, res: any) {
   query = Object.assign(query, JSON.parse(searchField));
 
   const product = db.model("Product", ProductSchema);
-  let data: any;
-
-  data = await product.find(JSON.parse(searchField));
+  const data = await product.find(query);
 
   res.status(200).json({
     data: data,

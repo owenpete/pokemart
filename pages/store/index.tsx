@@ -20,7 +20,7 @@ interface Props{
 }
 
 export async function getServerSideProps({query}){
-  const response = await localInstance.get('http://localhost:3000/api/products', {
+  const response = await localInstance.get('/products', {
     params: {
       //!
       skip: query.r*(query.page-1) || 8*(query.page-1),
@@ -139,7 +139,7 @@ export default function Store(props: Props){
                 description={value.description}
                 price={value.price}
                 rating={value.rating}
-                href={value.id}
+                href={value.productId}
                 key={Math.random()}
               />
             )
