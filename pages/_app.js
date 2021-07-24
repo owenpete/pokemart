@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Router from "next/router";
 import NProgress from "nprogress";
-import SideCart from '../components/SideCart';
 
+import '../styles/reset.scss';
 import "../styles/globals.scss";
 import "../styles/index.scss";
 import "../styles/navbar.scss";
@@ -14,12 +14,12 @@ import '../styles/store.scss';
 import '../styles/productCard.scss';
 import '../styles/pageSelector.scss';
 import '../styles/product.scss';
-import '../styles/sideCart.scss';
 import '../styles/loading.scss';
 import '../styles/cart.scss';
 import '../styles/cartProduct.scss';
 import '../styles/checkout.scss';
 import '../styles/orders.scss';
+import '../styles/sideNav.scss';
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());
