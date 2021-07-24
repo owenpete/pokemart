@@ -6,8 +6,13 @@
   width: 500px;
   border-radius: 0 5px 5px 0;
   background-color: var(--offWhite);
-  z-index: 1000;
+  z-index: 100;
   transition: width 250ms ease-in-out;
+}
+
+.sidenav__header{
+  display: flex;
+  align-items: center;
 }
 
 .sidenav__close{

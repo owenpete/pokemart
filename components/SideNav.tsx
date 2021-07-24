@@ -14,12 +14,14 @@ const SideNav = (props: Props) =>{
       className='sidenav'
       ref={props.sidebarRef}
     >
-      <FiX
-        className='sidenav__close'
-        onClick={(e)=>{
-          props.setToggle(!props.isToggled);
-        }}
-      />
+      <div className='sidenav__header'>
+        <FiX
+          className='sidenav__close'
+          onClick={(e)=>{
+            props.setToggle(!props.isToggled);
+          }}
+        />
+      </div>
     </div>
   );
 }

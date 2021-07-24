@@ -42,8 +42,12 @@ export default function Home(props: Props) {
   const toggleSidebar = () =>{
     if(sidebarIsToggled){
       sidebarRef.current.style.width=null
+      document.getElementById('dimmer').style.backgroundColor='hsla(0, 0%, 0%, 35%)';
+      document.getElementById('dimmer').style.pointerEvents='auto';
     }else{
       sidebarRef.current.style.width='0px'
+      document.getElementById('dimmer').style.backgroundColor=null;
+      document.getElementById('dimmer').style.pointerEvents=null;
     }
   }
 
