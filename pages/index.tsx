@@ -46,7 +46,6 @@ export default function Home(props: Props) {
         <title>Home | Pokémart</title>
         <link rel="icon" href="/ballLogo.png" />
       </Head>
-      <SideNav />
       <Navbar/>
       <SubNav />
       <ImageCarousel slides={props.slides} />
