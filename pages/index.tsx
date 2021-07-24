@@ -8,9 +8,8 @@ import { maxProductLimit } from '../constants/maxProductLimit';
 
 import Navbar from "../components/Navbar";
 import SubNav from "../components/SubNav";
+import SideNav from '../components/SideNav';
 import ImageCarousel from "../components/ImageCarousel";
-import SideCart from "../components/SideCart";
-import axios from "axios";
 import ReactStars from "react-rating-stars-component";
 
 interface Props {
@@ -47,8 +46,8 @@ export default function Home(props: Props) {
         <title>Home | Pokémart</title>
         <link rel="icon" href="/ballLogo.png" />
       </Head>
-      <Navbar
-      />
+      <SideNav />
+      <Navbar/>
       <SubNav />
       <ImageCarousel slides={props.slides} />
       <div className="index__store-header">

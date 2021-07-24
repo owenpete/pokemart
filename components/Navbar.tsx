@@ -41,7 +41,12 @@ export default function Navbar(){
   return (
     <div className='nav'>
       <div className='nav--left'>
-          <FiMenu className='nav__icon nav__menu-icon'/>
+        <FiMenu
+          className='nav__icon nav__menu-icon'
+          onClick={(e: any)=>{
+
+          }}
+        />
         <Link href='/'>
           <a><img className='nav__icon nav__logo' src='/logo.png' /></a>
         </Link>
