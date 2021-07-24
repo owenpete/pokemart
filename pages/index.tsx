@@ -37,16 +37,34 @@ export async function getServerSideProps(context: any) {
 }
 
 export default function Home(props: Props) {
+  const [sidebarIsToggled, setSidebarIsToggled] = useState(false);
+  const sidebarRef = useRef<any>();
+  const toggleSidebar = () =>{
+    if(sidebarIsToggled){
+      sidebarRef.current.style.width=null
+    }else{
+      sidebarRef.current.style.width='0px'
+    }
+  }
+
   useEffect(()=>{
-  });
-  //this funcion toggles the state of the sideCart component
+    toggleSidebar()
+  }, [sidebarIsToggled]);
   return (
     <div className="index">
       <Head>
         <title>Home | Pokémart</title>
         <link rel="icon" href="/ballLogo.png" />
       </Head>
-      <Navbar/>
+      <SideNav
+        isToggled={sidebarIsToggled}
+        setToggle={setSidebarIsToggled}
+        sidebarRef={sidebarRef}
+      />
+      <Navbar
+        sidebarIsToggled={sidebarIsToggled}
+        setSidebarIsToggled={setSidebarIsToggled}
+      />
       <SubNav />
       <ImageCarousel slides={props.slides} />
       <div className="index__store-header">

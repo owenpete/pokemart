@@ -8,7 +8,13 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { getCart, addCart } from '../utils/cartOps';
 import getCartSize from '../utils/getCartSize';
 
-export default function Navbar(){
+interface Props{
+  sidebarIsToggled: boolean;
+  setSidebarIsToggled: any;
+
+}
+
+export default function Navbar(props: Props){
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
   const [dropdown, setDropdown] = useState<any>(categories[0]);
   const [search, setSearch] = useState<string>("");
@@ -44,7 +50,7 @@ export default function Navbar(){
         <FiMenu
           className='nav__icon nav__menu-icon'
           onClick={(e: any)=>{
-
+            props.setSidebarIsToggled(!props.sidebarIsToggled);
           }}
         />
         <Link href='/'>
