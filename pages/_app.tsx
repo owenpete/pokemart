@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const sidebarRef = useRef<any>();
   const toggleSidebar = () =>{
     if(sidebarIsOpen){
-      sidebarRef.current.style.width=null
+      sidebarRef.current.style.width='500px'
       document.getElementById('dimmer').style.backgroundColor='hsla(0, 0%, 0%, 35%)';
       document.getElementById('dimmer').style.pointerEvents='auto';
     }else{

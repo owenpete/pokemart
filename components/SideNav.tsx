@@ -37,7 +37,7 @@ const SideNav = (props: Props) =>{
               <Link
                 href={value.link}
               >
-                <li onClick={()=>props.setToggle(false)}className='sidenav__list-element'>
+                <li className='sidenav__list-element'>
                   <a>
                     {value.icon}{value.title}
                   </a>

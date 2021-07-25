@@ -10,13 +10,14 @@ import { getCart, addCart } from '../utils/cartOps';
 import getCartSize from '../utils/getCartSize';
 
 export default function Navbar(){
-  const [sidebarIsToggled, setSidebarIsToggled] = useContext(SideNavContext);
+  const [sidebarIsOpen, setSidebarIsOpen] = useContext(SideNavContext);
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
   const [dropdown, setDropdown] = useState<any>(categories[0]);
   const [search, setSearch] = useState<string>("");
   const [cart, setCart] = useState<any>(null);
 
   useEffect(() => {
+    setSidebarIsOpen(false);
     //pull cart data from storage and display the proper number next to the cart icon
     setCart(getCart());
     function checkUserData() {
@@ -46,7 +47,7 @@ export default function Navbar(){
         <FiMenu
           className='nav__icon nav__menu-icon'
           onClick={(e: any)=>{
-            setSidebarIsToggled(!sidebarIsToggled);
+            setSidebarIsOpen(!sidebarIsOpen);
           }}
         />
         <Link href='/'>
