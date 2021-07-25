@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.4.5",
     "@types/mongodb": "^3.6.17",
     "@types/mongoose": "^5.10.5",
     "@types/react-slick": "^0.23.4",

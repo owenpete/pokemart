@@ -27,6 +27,7 @@ const renderThumbs = (children: any[], imgArr: string[]) => {
           src={value}
           height={70}
           width={70}
+          priority={true}
         />
       );
     });

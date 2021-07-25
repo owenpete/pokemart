@@ -1,24 +1,107 @@
+@import '_themes.scss';
+
 .sidenav{
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 500px;
-  border-radius: 0 5px 5px 0;
   background-color: var(--offWhite);
   z-index: 100;
+  overflow: hidden;
   transition: width 250ms ease-in-out;
 }
 
 .sidenav__header{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: var(--brandBlue);
+  .sidenav__header-text{
+    font-weight: 400;
+    font-size: 29px;
+    color: var(--offWhite);
+    letter-spacing: 3px;
+    margin: 0;
+  }
+
+  .sidenav__close{
+    font-size: 30px;
+    color: var(--offWhite);
+  }
 }
 
-.sidenav__close{
+.sidenav__list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.sidenav__list-element{
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  height: 5rem;
+  transition: all 150ms ease-in-out;
+  &:hover{
+    background-color: hsl(0, 0%, 90%);
+    color: var(--brandBlue);
+  }
+  &:active{
+    background-color: hsl(0, 0%, 85%);
+  }
+  a{
+    display: flex;
+    align-items: center;
+    font-size: 29px;
+  }
+  .sidenav__list-icon{
+    font-size: 29px;
+    margin-right: 1rem;
+    color: var(--brandRedLight);
+  }
+  .list-icon__home{
+  }
+  .list-icon__store{
+  }
+  .list-icon__cart{
+  }
+  .list-icon__lists{
+  }
+  .list-icon__orders{
+  }
+}
+
+.sidenav__footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   position: absolute;
-  font-size: 28px;
-  top: 0;
-  right: 0;
-  margin: 1rem;
+  bottom: 0;
+  height: 80px;
+  width: 100%;
+  border: 1px solid var(--green);
+  border-style: solid none none none;
+  .sidenav__github{
+    &:hover{
+      color: var(--brandBlueDark);
+    }
+  }
+  .sidenav__report{
+    &:hover{
+      color: var(--brandRedDark);
+    }
+  }
+}
+.sidenav__icon-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  transition: color 150ms ease-in-out;
+  .sidenav__icon{
+    font-size: 1.5rem;
+  }
 }

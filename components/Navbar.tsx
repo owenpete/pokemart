@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useContext } from 'react';
+import SideNavContext from '../contexts/SideNavContext';
 import router from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,13 +9,8 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { getCart, addCart } from '../utils/cartOps';
 import getCartSize from '../utils/getCartSize';
 
-interface Props{
-  sidebarIsToggled: boolean;
-  setSidebarIsToggled: any;
-
-}
-
-export default function Navbar(props: Props){
+export default function Navbar(){
+  const [sidebarIsToggled, setSidebarIsToggled] = useContext(SideNavContext);
   const categories = ['All', 'Health & Wellness', 'Food & Drink', 'Tech', 'Sports & Outdoors', 'On Sale', 'Under 1000$'];
   const [dropdown, setDropdown] = useState<any>(categories[0]);
   const [search, setSearch] = useState<string>("");
@@ -50,7 +46,7 @@ export default function Navbar(props: Props){
         <FiMenu
           className='nav__icon nav__menu-icon'
           onClick={(e: any)=>{
-            props.setSidebarIsToggled(!props.sidebarIsToggled);
+            setSidebarIsToggled(!sidebarIsToggled);
           }}
         />
         <Link href='/'>
@@ -64,7 +60,7 @@ export default function Navbar(props: Props){
           <select
             name='catagories'
             className='nav__dropdown'
-            onChange={(e)=>{console.log(e); setDropdown(e.target.value)}}
+            onChange={(e)=>{setDropdown(e.target.value)}}
             value={dropdown}
           >
             {
