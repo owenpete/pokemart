@@ -24,7 +24,7 @@ export default async function(req: any, res: any){
       .where('productId')
       .in(orderProductIds)
     ];
-    const sortedData = sortIdSync(productData, orderProducts);
+    const sortedData = sortIdSync(productData, orderProducts.map((value: any)=>value.productId));
     const mutatedOrderObject = orderProducts.map((value: any, index: number)=>{
       return {
         ...sortedData[index].toObject(),

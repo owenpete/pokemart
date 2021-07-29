@@ -60,7 +60,7 @@ export default function Checkout(props: Props){
         const productIds: any = getCart();
         const data = await localInstance.get('/products/getMany', {
           params: {
-            productIds: productIds
+            productIds: JSON.stringify(Object.values(productIds).map((value: any)=>value.productId))
           }
         });
       if(data.data){

@@ -1,0 +1,20 @@
+@import '_themes.scss';
+
+.list-item{
+  display: flex;
+  align-items: center;
+}
+
+.list-item__info{
+  margin-left: 0.25rem;
+  span{
+    font-size: 21px;
+  }
+  .list-item__name{
+    color: var(--brandBlueDark);
+    &:hover{
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}

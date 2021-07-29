@@ -29,10 +29,11 @@ useEffect(()=>{
     const ids = getCart();
     const data = await localInstance.get('products/getMany', {
       params: {
-        productIds: ids
+        productIds: JSON.stringify(Object.values(ids).map((value: any)=>value.productId))
       }
     });
   if(data.data){
+    console.log(data.data)
     setCart(data.data);
     setCartIds(Object.values(ids));
   }

@@ -25,6 +25,9 @@ import '../styles/cartProduct.scss';
 import '../styles/checkout.scss';
 import '../styles/orders.scss';
 import '../styles/sideNav.scss';
+import '../styles/lists.scss';
+import '../styles/createList.scss';
+import '../styles/listItem.scss';
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -34,30 +37,10 @@ Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const sidebarRef = useRef<any>();
-  const toggleSidebar = () =>{
-    if(sidebarIsOpen){
-      sidebarRef.current.style.width='500px'
-      document.getElementById('dimmer').style.backgroundColor='hsla(0, 0%, 0%, 35%)';
-      document.getElementById('dimmer').style.pointerEvents='auto';
-    }else{
-      sidebarRef.current.style.width='0px'
-      document.getElementById('dimmer').style.backgroundColor=null;
-      document.getElementById('dimmer').style.pointerEvents=null;
-    }
-  }
-  useEffect(()=>{
-    toggleSidebar();
-  }, [sidebarIsOpen]);
   return(
     <SideNavContext.Provider value={[sidebarIsOpen, setSidebarIsOpen]}>
       <div className='app'>
         <div id='dimmer'></div>
-        <SideNav
-          isToggled={sidebarIsOpen}
-          setToggle={setSidebarIsOpen}
-          sidebarRef={sidebarRef}
-        />
         <Component {...pageProps} />
       </div>
     </SideNavContext.Provider>

@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import SideNavContext from '../contexts/SideNavContext';
+import SideNav from '../components/SideNav';
 import router from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -40,9 +41,29 @@ export default function Navbar(){
       });
     }
   }
+  const sidebarRef = useRef<any>();
+  const toggleSidebar = () =>{
+    if(sidebarIsOpen){
+      sidebarRef.current.style.width='500px'
+      document.getElementById('dimmer').style.backgroundColor='hsla(0, 0%, 0%, 35%)';
+      document.getElementById('dimmer').style.pointerEvents='auto';
+    }else{
+      sidebarRef.current.style.width='0px'
+      document.getElementById('dimmer').style.backgroundColor=null;
+      document.getElementById('dimmer').style.pointerEvents=null;
+    }
+  }
+  useEffect(()=>{
+    toggleSidebar();
+  }, [sidebarIsOpen]);
 
   return (
     <div className='nav'>
+      <SideNav
+        isToggled={sidebarIsOpen}
+        setToggle={setSidebarIsOpen}
+        sidebarRef={sidebarRef}
+      />
       <div className='nav--left'>
         <FiMenu
           className='nav__icon nav__menu-icon'

@@ -1,0 +1,114 @@
+@import '_themes.scss';
+
+.list__component{
+  display: flex;
+  margin: 2rem 10%;
+  .lists__list{
+    margin: 0;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 5px;
+  }
+  .list__contents{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    margin-left: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+}
+
+.lists__list-element{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  height: auto;
+  width: 16rem;
+  margin: 0.5rem 0;
+  padding: 1rem 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transform: all 100ms ease-in-out;
+  a{
+    font-size: 25px;
+    color: var(--brandBlue);
+    margin: 0 0.5rem;
+    word-break: break-word;
+  }
+  &:hover{
+    a{
+      text-decoration: underline;
+    }
+    a, .list-element__total-items{
+      color: var(--brandRedLight);
+    }
+  }
+  .list-element__total-items{
+    white-space: nowrap;
+  }
+}
+
+.list-element__image-container{
+  position: relative;
+  .list-element__item-number{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: var(--green);
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 1;
+  }
+}
+
+.lists__create-new-list{
+  display: flex;
+  align-items: center;
+  font-size: 21px;
+  justify-content: center;
+  height: 45px;
+  width: 100%;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  border: 1px solid var(--green);
+  border-radius: 5px;
+  background-color: transparent;
+  transition: all 100ms ease-in-out;
+  &:hover{
+    background-color: var(--green);
+  }
+}
+
+.lists__empty-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6rem;
+  .lists__empty-text{
+    font-size: 28px;
+    margin-bottom: 1.5rem;
+  }
+  .lists__empty-create-button{
+    font-size: 23px;
+    height: 2.5rem;
+    width: 10rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--brandRed);
+    transition: all 100ms ease-in-out;
+    &:hover{
+      background-color: var(--brandRedLight);
+    }
+    &:active{
+      background-color: green;
+      background-color: var(--brandRedDark);
+    }
+  }
+}
+

@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { getCart } from '../utils/cartOps';
+import getCartSize from '../utils/getCartSize';
 import Link from 'next/link';
 import { FiX, FiAlertTriangle, FiHome, FiShoppingBag, FiShoppingCart, FiList, FiPackage } from 'react-icons/fi';
 import { FaGithub } from 'react-icons/fa';
@@ -10,12 +12,45 @@ interface Props{
 }
 
 const SideNav = (props: Props) =>{
+  const [cart, setCart] = useState<any>(0);
+  useEffect(()=>{
+    let cartSize: number = getCart() || 0;
+    setCart(cartSize);
+    function checkUserData() {
+      const item = getCart();
+      setCart(item)
+    }
+    window.addEventListener("storage", checkUserData)
+    return () => {
+      window.removeEventListener("storage", checkUserData)
+    }
+  }, []);
   const sidenavListOptions = [
-    {title: "Home", icon: <FiHome className='sidenav__list-icon list-icon__home'/>, link: '/'},
-    {title: "Store", icon: <FiShoppingBag className='sidenav__list-icon list-icon__store'/>, link: '/store'},
-    {title: "Cart", icon: <FiShoppingCart className='sidenav__list-icon list-icon__cart'/>, link: '/cart'},
-    {title: "Lists", icon: <FiList className='sidenav__list-icon list-icon__lists'/>, link: '/lists'},
-    {title: "Orders", icon: <FiPackage className='sidenav__list-icon list-icon__orders'/>, link: '/orders'}
+    {
+      title: "Home",
+      icon: <FiHome className="sidenav__list-icon list-icon__home" />,
+      link: "/",
+    },
+    {
+      title: "Store",
+      icon: <FiShoppingBag className="sidenav__list-icon list-icon__store" />,
+      link: "/store",
+    },
+    {
+      title: `Cart (${cart ? getCartSize(cart) : 0})`,
+      icon: <FiShoppingCart className="sidenav__list-icon list-icon__cart" />,
+      link: "/cart",
+    },
+    {
+      title: "Lists",
+      icon: <FiList className="sidenav__list-icon list-icon__lists" />,
+      link: "/lists",
+    },
+    {
+      title: "Orders",
+      icon: <FiPackage className="sidenav__list-icon list-icon__orders" />,
+      link: "/orders",
+    },
   ];
   return (
     <div
@@ -32,10 +67,11 @@ const SideNav = (props: Props) =>{
         />
       </div>
       <ul className='sidenav__list'>
-        {sidenavListOptions.map((value: any)=>{
+        {sidenavListOptions.map((value: any, index: any)=>{
             return (
               <Link
                 href={value.link}
+                key={index}
               >
                 <li className='sidenav__list-element'>
                   <a>
