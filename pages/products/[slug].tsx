@@ -15,6 +15,7 @@ import ReactStars from "react-rating-stars-component";
 import { maxProductLimit } from '../../constants/maxProductLimit';
 
 import { addCart } from '../../utils/cartOps';
+import { addToList, getLists } from '../../utils/listOps';
 
 interface Props{
   product: any;
@@ -132,6 +133,22 @@ export default function Products(props: Props){
             <span>{props.product.description}</span>
           </div>
           <div className='info__buy-actions'>
+            <div className='info__save-to-list'>
+              <input
+                className='info__element info__save-to-list-button'
+                type='button'
+                value='Save to List'
+                onClick={()=>{addToList('default', props.product.productId)}}
+              />
+              <button
+                className='info-element info__save-to-list-select-button'
+                onClick={()=>{
+                  const lists = getLists();
+                }}
+              >
+                <FiChevronDown className='quantity__dropdown-arrow' />
+              </button>
+            </div>
             <input
               className='info__element info__add-to-cart-button'
               type='button'

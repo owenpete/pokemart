@@ -113,7 +113,7 @@
 }
 
 .info__buy-actions{
-  .info__add-to-cart-button, .info__buy-it-now-button{
+  .info__save-to-list-button, .info__add-to-cart-button, .info__buy-it-now-button{
     height: 50px;
     width: 100%;
     margin-bottom: 0.5rem;
@@ -122,6 +122,42 @@
     border: none;
     border-radius: 5px;
     transition: all ease-in-out 100ms;
+  }
+  .info__save-to-list{
+    display: flex;
+    margin-bottom: 0.5rem;
+    position: relative;
+    .info__save-to-list-button{
+      background-color: transparent;
+      border: 2px solid black;
+      border-radius: 5px;
+      margin: 0;
+      &:hover{
+        background-color: hsl(0, 0%, 100%);
+      }
+      &:active{
+        background-color: hsl(0, 0%, 95%);
+      }
+    }
+    .info__save-to-list-select-button{
+      display: flex;
+      position: absolute;
+      right: 0;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border: 2px solid black;
+      border-radius: 0 5px 5px 0;
+      outline: none;
+      margin-bottom: 0.5rem;
+      &:hover{
+        background-color: hsl(0, 0%, 100%);
+      }
+      &:active{
+        background-color: hsl(0, 0%, 95%);
+      }
+    }
   }
   .info__add-to-cart-button{
     background-color: transparent;

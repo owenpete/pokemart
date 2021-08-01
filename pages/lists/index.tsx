@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import SubNav from '../../components/SubNav';
 import Loading from '../../components/Loading';
@@ -10,7 +9,6 @@ import localInstance from '../../services/api/localInstance';
 import sortIdSync from '../../utils/sortIdSync';
 import { getLists } from '../../utils/listOps';
 import makeList from '../../utils/makeList';
-import { BiDotsHorizontal } from 'react-icons/bi';
 
 interface Props{
   listId?: string;
@@ -111,7 +109,7 @@ export default function Lists(props: Props){
                   )
                 })
                 :
-                  <span style={{margin: 'auto'}}>No items in list.</span>
+                  <span style={{margin: 'auto'}}>No items in "{currentListData.listName}"</span>
             }
           </div>
         </div>
