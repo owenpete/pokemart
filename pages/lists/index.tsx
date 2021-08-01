@@ -12,11 +12,17 @@ import { getLists } from '../../utils/listOps';
 import makeList from '../../utils/makeList';
 import { BiDotsHorizontal } from 'react-icons/bi';
 
-export default function Lists(){
+interface Props{
+  listId?: string;
+}
+
+export default function Lists(props: Props){
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [lists, setLists] = useState<any>(null);
   const [isCreatingList, setIsCreatingList] = useState<boolean>(false);
   const [rerender, setRerender] = useState<boolean>(false);
+  const [lists, setLists] = useState<any>(null);
+  const [currentListIndex, setCurrentListIndex] = useState<any>(0);
+  const [currentListData, setCurrentListData] = useState<any>(null);
 
   useEffect(()=>{
     if(isCreatingList){
@@ -32,25 +38,37 @@ export default function Lists(){
     setLists(undefined);
     (async() =>{
       const list: any = getLists();
+      const listArray: any[] = list? Object.values(list) : [];
+      let localCurrentListIndex = currentListIndex;
+      if(list && props.listId){
+        const listIndex = Object.values(list).indexOf(list[props.listId]);
+        localCurrentListIndex = listIndex;
+      }
+      // fetching list data
       if(list){
-        //const formattedList: any = Object.values(list).map((value: any)=>{return value.listItems[0]? value : {...value, listItems: [{productId: 'missingno'}]}});
-        //try{
-          //const listRes: any = await localInstance.get('/products/getMany',{
-            //params: {
-              //productIds: JSON.stringify(formattedList.map((value: any)=>value.listItems[0].productId))
-            //}
-          //});
-          //const sortedData = sortIdSync(listRes.data, formattedList.map((value: any)=>value.listItems[0].productId));
-          //const finalList = makeList(list, sortedData);
-          //setLists(finalList);
-          setLists(Object.values(list))
-        //}catch(err: any){
-          //console.log(err)
-        //}
+        let listItemIds: any[] = [];
+        if(listArray[localCurrentListIndex]?.listItems){
+          listItemIds=listArray[localCurrentListIndex].listItems.map((value: any)=>value.productId);
+        }
+        try{
+          const listRes: any = await localInstance.get('/products/getMany',{
+            params: {
+              productIds: JSON.stringify(listItemIds)
+            }
+          });
+          const sortedData: any = sortIdSync(listRes.data, listItemIds);
+          const finalList = makeList(listArray[currentListIndex], sortedData);
+          // setting states
+          setCurrentListIndex(currentListIndex);
+          setLists(Object.values(list));
+          setCurrentListData(finalList);
+        }catch(err: any){
+          console.log(err)
+        }
       }
       setIsLoaded(true);
     })();
-  }, [rerender])
+  }, [rerender, props.listId])
 
   return (
     <div className='lists'>
@@ -68,27 +86,32 @@ export default function Lists(){
             {lists.map((value: any, index: number)=>{
               return (
                 <Link
-                  href={`lists/${value.listId}`}
+                  href={`/lists/${value.listId}`}
+                  key={index}
                 >
-                  <li className='lists__list-element'>
-                      <a>
-                        {value.listName}
-                      </a>
-                    <span className='list-element__total-items'>{8} items</span>
-                  </li>
+                    <li className='lists__list-element'>
+                    <a>
+                      <span className='list-element__list-name'>{value.listName}</span>
+                    </a>
+                      <span className='list-element__total-items'>{value.listItems.length} {value.listItems.length==1?'item':'items'}</span>
+                    </li>
                 </Link>
               )
             })
             }
           </ul>
           <div className='list__contents'>
-            {[...Array(8)].map((value: any)=>{
-              return(
-                <ListItem
-                  itemData={{}}
-                />
-              )
-            })
+            {currentListData.listItems.length!=0?
+              currentListData.listItems.map((value: any, index: number)=>{
+                  return(
+                    <ListItem
+                      itemData={value}
+                      key={index}
+                    />
+                  )
+                })
+                :
+                  <span style={{margin: 'auto'}}>No items in list.</span>
             }
           </div>
         </div>

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import ReactStars from 'react-rating-stars-component';
 
 interface Props{
-  itemData: {};
+  itemData: any;
 }
 
 const listItem = (props: Props) =>{
@@ -13,23 +13,27 @@ const listItem = (props: Props) =>{
     <div className='list-item'>
       <div className='list-item__image-container'>
         <Image
-          src={'https://storage.googleapis.com/pkmproducts/pokeballs/pokeball/pokeball.jpg'}
+          src={props.itemData.images[0]}
           height={120}
           width={120}
           quality={100}
         />
       </div>
       <div className='list-item__info'>
-        <span className='list-item__name'>Poke Ball</span>
+        <Link href={`/products/${props.itemData.productId}`}>
+          <a>
+            <span className='list-item__name'>{props.itemData.name}</span>
+          </a>
+        </Link>
         <ReactStars
           className='list-item__rating'
-          value={5}
+          value={props.itemData.rating}
           count={5}
           isHalf={true}
           edit={false}
           size={28}
         />
-        <span className='list-item__price'>$100</span>
+        <span className='list-item__price'>${props.itemData.price}</span>
       </div>
     </div>
   );

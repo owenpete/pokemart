@@ -33,17 +33,17 @@
   border-radius: 5px;
   cursor: pointer;
   transform: all 100ms ease-in-out;
-  a{
+  .list-element__list-name{
     font-size: 25px;
     color: var(--brandBlue);
     margin: 0 0.5rem;
     word-break: break-word;
   }
   &:hover{
-    a{
+    .list-element__list-name{
       text-decoration: underline;
     }
-    a, .list-element__total-items{
+    .list-element__list-name, .list-element__total-items{
       color: var(--brandRedLight);
     }
   }
