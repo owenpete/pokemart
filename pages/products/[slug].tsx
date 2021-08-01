@@ -6,8 +6,9 @@ import Link from 'next/link';
 
 import Navbar from '../../components/Navbar';
 import SubNav from '../../components/SubNav';
+import ListSelect from '../../components/ListSelect';
 
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiList } from 'react-icons/fi';
 
 import localInstance from '../../services/api/localInstance';
 import { Carousel } from 'react-responsive-carousel';
@@ -57,6 +58,7 @@ export async function getServerSideProps({query}){
 
 export default function Products(props: Props){
   const [quantity, setQuantity] = useState(1);
+  const [listSelectIsEnabled, setListSelectIsEnabled] = useState<boolean>(false);
 
   return (
     <div className='product'>
@@ -64,6 +66,11 @@ export default function Products(props: Props){
         <title>{props.product.name}</title>
         <link rel="icon" href="/ballLogo.png" />
       </Head>
+      <ListSelect
+        isEnabled={listSelectIsEnabled}
+        setIsEnabled={setListSelectIsEnabled}
+        product={props.product}
+      />
       <Navbar />
       <SubNav />
       <div className='product__container'>
@@ -90,6 +97,7 @@ export default function Products(props: Props){
                         height={600}
                         width={600}
                         layout='fixed'
+                        priority={true}
                         quality={100}
                       />
                     </div>
@@ -142,11 +150,11 @@ export default function Products(props: Props){
               />
               <button
                 className='info-element info__save-to-list-select-button'
-                onClick={()=>{
-                  const lists = getLists();
+                onClick={(e: any)=>{
+                  setListSelectIsEnabled(true);
                 }}
               >
-                <FiChevronDown className='quantity__dropdown-arrow' />
+                <FiList className='quantity__dropdown-arrow' />
               </button>
             </div>
             <input

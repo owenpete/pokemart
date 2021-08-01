@@ -9,6 +9,7 @@ import localInstance from '../../services/api/localInstance';
 import sortIdSync from '../../utils/sortIdSync';
 import { getLists } from '../../utils/listOps';
 import makeList from '../../utils/makeList';
+import toggleDimmer from '../../utils/toggleDimmer';
 
 interface Props{
   listId?: string;
@@ -23,10 +24,8 @@ export default function Lists(props: Props){
   const [currentListData, setCurrentListData] = useState<any>(null);
 
   useEffect(()=>{
-    if(isCreatingList){
-      document.getElementById('dimmer').style.backgroundColor='hsla(0, 0%, 0%, 35%)';
-    }else{
-      document.getElementById('dimmer').style.backgroundColor=null;
+    toggleDimmer(isCreatingList);
+    if(isCreatingList==false){
       setRerender(!rerender);
     }
   }, [isCreatingList])

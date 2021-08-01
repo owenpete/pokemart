@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useContext } from 'react';
+import toggleDimmer from '../utils/toggleDimmer';
 import SideNavContext from '../contexts/SideNavContext';
 import SideNav from '../components/SideNav';
 import router from 'next/router';
@@ -45,12 +46,10 @@ export default function Navbar(){
   const toggleSidebar = () =>{
     if(sidebarIsOpen){
       sidebarRef.current.style.width='500px'
-      document.getElementById('dimmer').style.backgroundColor='hsla(0, 0%, 0%, 35%)';
-      document.getElementById('dimmer').style.pointerEvents='auto';
+      toggleDimmer(sidebarIsOpen);
     }else{
       sidebarRef.current.style.width='0px'
-      document.getElementById('dimmer').style.backgroundColor=null;
-      document.getElementById('dimmer').style.pointerEvents=null;
+      toggleDimmer(sidebarIsOpen);
     }
   }
   useEffect(()=>{

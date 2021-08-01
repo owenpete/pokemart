@@ -29,6 +29,7 @@ import '../styles/sideNav.scss';
 import '../styles/lists.scss';
 import '../styles/createList.scss';
 import '../styles/listItem.scss';
+import '../styles/listSelect.scss';
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());

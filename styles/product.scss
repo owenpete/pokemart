@@ -141,9 +141,12 @@
     }
     .info__save-to-list-select-button{
       display: flex;
+      align-items: center;
+      justify-content: center;
       position: absolute;
       right: 0;
       height: 100%;
+      width: 2.5rem;
       align-items: center;
       justify-content: center;
       background-color: transparent;
