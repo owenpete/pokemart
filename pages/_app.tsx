@@ -1,6 +1,7 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app';
 import { useState, useEffect, useRef } from 'react';
+import { initList } from '../utils/listOps';
 import Router from "next/router";
 import NProgress from "nprogress";
 import SideNav from '../components/SideNav';
@@ -36,6 +37,10 @@ Router.events.on("routeChangeError", () => NProgress.done());
 
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(()=>{
+    //create a default wish list if there isnt one already
+    initList();
+  });
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   return(
     <SideNavContext.Provider value={[sidebarIsOpen, setSidebarIsOpen]}>
