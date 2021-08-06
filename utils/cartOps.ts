@@ -32,7 +32,7 @@ export const addCart = (productId: string, numberOfItems: number, method: 'set' 
       };
       window.localStorage.setItem('cart', JSON.stringify({...cart}));
     }
-    window.dispatchEvent( new Event('storage') );
+    window.dispatchEvent( new Event('storage', {cancelable: true}) );
   }catch(err: any){
     console.log(err)
   }
@@ -47,7 +47,7 @@ export const removeCart = (productId: string) =>{
     }else{
       window.localStorage.setItem('cart', JSON.stringify({...cart}));
     }
-    window.dispatchEvent( new Event('storage') );
+    window.dispatchEvent( new Event('storage', {cancelable: true}) );
   }catch(err: any){
     console.log(err)
   }
@@ -56,7 +56,7 @@ export const removeCart = (productId: string) =>{
 export const clearCart = () =>{
   try{
     window.localStorage.removeItem('cart');
-    window.dispatchEvent( new Event('storage') );
+    window.dispatchEvent( new Event('storage', {cancelable: true}) );
   }catch(err: any){
     console.log(err);
   }

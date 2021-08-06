@@ -70,6 +70,7 @@ export default function Products(props: Props){
         isEnabled={listSelectIsEnabled}
         setIsEnabled={setListSelectIsEnabled}
         product={props.product}
+        mode={'add'}
       />
       <Navbar />
       <SubNav />

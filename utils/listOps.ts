@@ -50,7 +50,8 @@ export const getLists = () =>{
 }
 
 export const getListById = (listId: string) =>{
-
+  const lists = getLists();
+  return lists[listId];
 }
 
 export const createList = (listName: string) =>{
@@ -71,7 +72,6 @@ export const createList = (listName: string) =>{
 export const addToList = (listId: string, productId: string) =>{
   const lists: any = getLists();
   const hasLists: boolean = lists!=null;
-  let defaultListIndex: number = -1;
   let listObject: any = undefined;
   if(!hasLists){
     // initialize a new default list
@@ -105,4 +105,27 @@ export const addToList = (listId: string, productId: string) =>{
   if(listObject){
     window.localStorage.setItem(listStorageName, JSON.stringify(listObject))
   }
+}
+
+export const removeListItem = (listId: string, itemId: string, willTriggerUpdate: boolean = true) =>{
+  const lists = getLists();
+  const newListObject = {
+    ...lists,
+    [listId]: {
+      ...lists[listId],
+      listItems: lists[listId].listItems.filter((value: any)=>{
+        return value.productId!=itemId;
+      })
+    }
+  }
+  window.localStorage.setItem(listStorageName, JSON.stringify(newListObject));
+  if(willTriggerUpdate){
+    window.dispatchEvent( new Event('storage', {cancelable: true}) );
+  }
+}
+
+export const moveListItem = (itemId: string, currentListId: string, newListId: string) =>{
+  removeListItem(currentListId, itemId, false);
+  addToList(newListId, itemId);
+  window.dispatchEvent( new Event('storage', {cancelable: true}) );
 }

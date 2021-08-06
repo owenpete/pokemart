@@ -19,7 +19,7 @@
   height: 100%;
   .nav__menu-icon{
     font-size: 28px;
-    color: var(--brandBlueLight);
+    color: var(--backgroundLightBlue);
     margin-right: 30px;
     &:hover{
       color: white;
@@ -65,7 +65,7 @@
   .nav__dropdown{
     font-size: 16px;
     position: absolute;
-    background-color: var(--brandBlueLight);
+    background-color: var(--backgroundLightBlue);
     height: $searchHeight;
     width: 100%;
     border: none;
@@ -112,7 +112,7 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: var(--brandBlueLight);
+    color: var(--backgroundLightBlue);
     text-align: center;
     margin-right: 40px;
     height: 100%;
@@ -132,7 +132,7 @@
   }
   .nav__cart-icon{
     font-size: 28px;
-    color: var(--brandBlueLight);
+    color: var(--backgroundLightBlue);
     &:hover{
       color: white;
     }

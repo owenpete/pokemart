@@ -1,22 +1,25 @@
-import { useEffect, useState } from 'react';
-import Lists from '../lists/index';
+import List from './index';
+import { useState, useEffect } from 'react';
 
 interface Props{
-  query: string;
+  listId: string;
+  number: any;
 }
 
 export async function getServerSideProps({ query }){
   return {
     props: {
-      query: query.slug
+      listId: query.slug,
     }
   }
 }
 
-const ListSlug = (props: Props) =>{
-  return(
-    <Lists listId={props.query}/>
+const SlugList = (props: Props) =>{
+  return (
+    <List
+      listId={props.listId}
+    />
   );
 }
 
-export default ListSlug;
+export default SlugList;

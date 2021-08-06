@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getLists, addToList } from '../utils/listOps';
+import { getLists, addToList, moveListItem } from '../utils/listOps';
 import toggleDimmer from '../utils/toggleDimmer';
 
 import Image from 'next/image';
@@ -11,6 +11,9 @@ interface Props{
   isEnabled: boolean;
   setIsEnabled: (arg: boolean)=>void;
   product: any;
+  mode: 'add' | 'move';
+  currentListId?: string;
+  refetchData: any;
 }
 
 const ListSelect = (props: Props) =>{
@@ -18,14 +21,11 @@ const ListSelect = (props: Props) =>{
   const [lists, setLists] = useState<any[]>();
   useEffect(()=>{
     setIsLoaded(false);
+    toggleDimmer(props.isEnabled);
     const listArray = Object.values(getLists());
     setLists(listArray);
     setIsLoaded(true);
   }, [props.isEnabled]);
-
-  useEffect(()=>{
-    toggleDimmer(props.isEnabled);
-  }, [props.isEnabled])
 
   return (
     <>
@@ -45,7 +45,15 @@ const ListSelect = (props: Props) =>{
                 <li
                   className='list-select__element'
                   key={index}
-                  onClick={(e: any)=>{addToList(value.listId, props.product.productId); props.setIsEnabled(false)}}
+                  onClick={(e: any)=>{
+                    if(props.mode=='add'){
+                      addToList(value.listId, props.product.productId)
+                    }else{
+                      moveListItem(props.product.productId, props.currentListId, value.listId);
+                      props.refetchData();
+                    }
+                      props.setIsEnabled(false);
+                  }}
                 >
                   <span>
                     {value.listName}

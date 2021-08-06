@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import ListSelect from '../../components/ListSelect';
 import Navbar from '../../components/Navbar';
 import SubNav from '../../components/SubNav';
 import Loading from '../../components/Loading';
@@ -12,25 +13,20 @@ import makeList from '../../utils/makeList';
 import toggleDimmer from '../../utils/toggleDimmer';
 
 interface Props{
-  listId?: string;
+  listId: string;
 }
 
-export default function Lists(props: Props){
+const Lists = (props: Props)=>{
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isCreatingList, setIsCreatingList] = useState<boolean>(false);
   const [rerender, setRerender] = useState<boolean>(false);
   const [lists, setLists] = useState<any>(null);
   const [currentListIndex, setCurrentListIndex] = useState<any>(0);
   const [currentListData, setCurrentListData] = useState<any>(null);
+  const [listSelectIsEnabled, setListSelectIsEnabled] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
 
-  useEffect(()=>{
-    toggleDimmer(isCreatingList);
-    if(isCreatingList==false){
-      setRerender(!rerender);
-    }
-  }, [isCreatingList])
-
-  useEffect(()=>{
+  const fetchData = () =>{
     setIsLoaded(false);
     setLists(undefined);
     (async() =>{
@@ -54,10 +50,10 @@ export default function Lists(props: Props){
             }
           });
           const sortedData: any = sortIdSync(listRes.data, listItemIds);
-          const finalList = makeList(listArray[currentListIndex], sortedData);
+          const finalList = makeList(listArray[localCurrentListIndex], sortedData);
           // setting states
-          setCurrentListIndex(currentListIndex);
-          setLists(Object.values(list));
+          setCurrentListIndex(localCurrentListIndex);
+          setLists(listArray);
           setCurrentListData(finalList);
         }catch(err: any){
           console.log(err)
@@ -65,10 +61,31 @@ export default function Lists(props: Props){
       }
       setIsLoaded(true);
     })();
+  }
+
+  useEffect(()=>{
+    toggleDimmer(isCreatingList);
+    if(isCreatingList==false){
+      setRerender(!rerender);
+    }
+  }, [isCreatingList])
+
+  useEffect(()=>{
+    fetchData();
   }, [rerender, props.listId])
 
   return (
     <div className='lists'>
+      {lists&&isLoaded&&
+        <ListSelect
+          isEnabled={listSelectIsEnabled}
+          setIsEnabled={setListSelectIsEnabled}
+          product={selectedItem}
+          mode={'move'}
+          currentListId={currentListData.listId}
+          refetchData={fetchData}
+        />
+      }
       <Navbar />
       <SubNav />
       {lists&&isLoaded&&
@@ -103,6 +120,10 @@ export default function Lists(props: Props){
                   return(
                     <ListItem
                       itemData={value}
+                      currentListId={currentListData.listId}
+                      setListSelectIsEnabled={setListSelectIsEnabled}
+                      setSelectedItem={setSelectedItem}
+                      fetchData={fetchData}
                       key={index}
                     />
                   )
@@ -137,12 +158,4 @@ export default function Lists(props: Props){
   );
 }
 
-                  //<div className='list-element__image-container'>
-                    //<span className='list-element__item-number'>+{23487248} more</span>
-                    //<Image
-                      //src={value.listItems[0].images[0]}
-                      //height={50}
-                      //width={50}
-                      //className='list-element__image'
-                    ///>
-                  //</div>
+export default Lists;
