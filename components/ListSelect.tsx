@@ -13,7 +13,7 @@ interface Props{
   product: any;
   mode: 'add' | 'move';
   currentListId?: string;
-  refetchData: any;
+  refetchData?: any;
 }
 
 const ListSelect = (props: Props) =>{
