@@ -6,9 +6,10 @@ import SubNav from '../../components/SubNav';
 import Loading from '../../components/Loading';
 import CreateList from '../../components/CreateList';
 import ListItem from '../../components/ListItem';
+import { FiTrash } from 'react-icons/fi';
 import localInstance from '../../services/api/localInstance';
 import sortIdSync from '../../utils/sortIdSync';
-import { getLists } from '../../utils/listOps';
+import { getLists, removeList } from '../../utils/listOps';
 import makeList from '../../utils/makeList';
 import toggleDimmer from '../../utils/toggleDimmer';
 
@@ -99,17 +100,28 @@ const Lists = (props: Props)=>{
             </button>
             {lists.map((value: any, index: number)=>{
               return (
-                <Link
-                  href={`/lists/${value.listId}`}
-                  key={index}
-                >
                     <li className='lists__list-element'>
-                    <a>
-                      <span className='list-element__list-name'>{value.listName}</span>
-                    </a>
-                      <span className='list-element__total-items'>{value.listItems.length} {value.listItems.length==1?'item':'items'}</span>
+                      <Link
+                        href={`/lists/${value.listId}`}
+                        key={index}
+                      >
+                        <a className='list-element__info'>
+                          <span className='list-element__list-name'>{value.listName}</span>
+                          <span className='list-element__total-items'>{value.listItems.length} {value.listItems.length==1?'item':'items'}</span>
+                        </a>
+                      </Link>
+                      {!value.default&&
+                        <div
+                          className='list-element__remove-list-container'
+                          onClick={()=>{
+                            removeList(value.listId);
+                            fetchData();
+                          }}
+                        >
+                          <FiTrash className='list-element__remove-list-icon'/>
+                        </div>
+                      }
                     </li>
-                </Link>
               )
             })
             }
@@ -133,7 +145,8 @@ const Lists = (props: Props)=>{
                 })
                 :
                   <span style={{margin: 'auto'}}>No items in "{currentListData.listName}"</span>
-            }          </div>
+            }
+          </div>
         </div>
       }
       {!lists&&isLoaded&&

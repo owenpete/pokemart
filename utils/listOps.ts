@@ -69,12 +69,17 @@ export const createList = (listName: string) =>{
   window.localStorage.setItem(listStorageName, JSON.stringify(listObject))
 }
 
+export const removeList = (listId: string) =>{
+  const lists: any = getLists();
+  delete lists[listId];
+  window.localStorage.setItem(listStorageName, JSON.stringify(lists));
+}
+
 export const addToList = (listId: string, productId: string) =>{
   const lists: any = getLists();
   const hasLists: boolean = lists!=null;
   let listObject: any = undefined;
   if(!hasLists){
-    // initialize a new default list
     initDefaultList();
   }
   const listArray: any = Object.values(lists);
