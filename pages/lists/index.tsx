@@ -180,8 +180,9 @@ const Lists = (props: Props)=>{
       }
       {isCreatingList&&isLoaded&&
         <CreateList
-            isCreatingList={isCreatingList}
-            setIsCreatingList={setIsCreatingList}
+          isCreatingList={isCreatingList}
+          setIsCreatingList={setIsCreatingList}
+          refetchData={fetchData}
         />
       }
       {!isLoaded&&

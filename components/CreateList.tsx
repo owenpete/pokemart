@@ -6,6 +6,7 @@ import { FiX } from 'react-icons/fi';
 interface Props{
   isCreatingList: boolean;
   setIsCreatingList: any;
+  refetchData: ()=>void;
 }
 
 const CreateList = (props: Props) =>{
@@ -15,6 +16,7 @@ const CreateList = (props: Props) =>{
   const submitList = (listName: string) =>{
     if(listName!=''){
       createList(listName); props.setIsCreatingList(false)
+      props.refetchData();
     }
   }
 
