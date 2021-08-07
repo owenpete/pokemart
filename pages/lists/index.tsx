@@ -23,7 +23,6 @@ const Lists = (props: Props)=>{
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isCreatingList, setIsCreatingList] = useState<boolean>(false);
-  const [rerender, setRerender] = useState<boolean>(false);
   const [lists, setLists] = useState<any>(null);
   const [currentListIndex, setCurrentListIndex] = useState<any>(0);
   const [currentListData, setCurrentListData] = useState<any>(null);
@@ -76,15 +75,8 @@ const Lists = (props: Props)=>{
   }
 
   useEffect(()=>{
-    toggleDimmer(isCreatingList);
-    if(isCreatingList==false){
-      setRerender(!rerender);
-    }
-  }, [isCreatingList])
-
-  useEffect(()=>{
     fetchData();
-  }, [rerender, props.listId])
+  }, [props.listId])
 
   return (
     <div className='lists'>
@@ -161,6 +153,7 @@ const Lists = (props: Props)=>{
                     <ListItem
                       itemData={value}
                       currentListId={currentListData.listId}
+                      listSelectIsEnabled={listSelectIsEnabled}
                       setListSelectIsEnabled={setListSelectIsEnabled}
                       setSelectedItem={setSelectedItem}
                       fetchData={fetchData}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import toggleDimmer from '../utils/toggleDimmer';
 import { addCart } from '../utils/cartOps';
 import { removeListItem, moveListItem } from '../utils/listOps';
 import Link from 'next/link';
@@ -11,12 +12,16 @@ import { FiShoppingCart, FiFolder, FiX } from 'react-icons/fi';
 interface Props{
   itemData: any;
   currentListId: string;
+  listSelectIsEnabled: boolean;
   setListSelectIsEnabled: (arg: boolean)=>void;
   setSelectedItem: any;
   fetchData: any;
 }
 
 const listItem = (props: Props) =>{
+  useEffect(()=>{
+    toggleDimmer(props.listSelectIsEnabled);
+  });
   return (
     <div className='list-item'>
       <ReactTooltip
@@ -63,6 +68,7 @@ const listItem = (props: Props) =>{
           className='list-item__move list-item__action-element'
           onClick={(e: any)=>{
             props.setSelectedItem(props.itemData);
+            toggleDimmer()
             props.setListSelectIsEnabled(true);
           }}
           data-tip='Move item'

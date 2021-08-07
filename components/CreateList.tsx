@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import toggleDimmer from '../utils/toggleDimmer';
 import { createList } from '../utils/listOps';
 import { FiX } from 'react-icons/fi';
 
@@ -18,6 +19,7 @@ const CreateList = (props: Props) =>{
   }
 
   useEffect(()=>{
+    toggleDimmer(props.isCreatingList);
     inputRef.current.focus();
   });
 
