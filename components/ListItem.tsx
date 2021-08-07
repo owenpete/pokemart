@@ -68,7 +68,6 @@ const listItem = (props: Props) =>{
           className='list-item__move list-item__action-element'
           onClick={(e: any)=>{
             props.setSelectedItem(props.itemData);
-            toggleDimmer()
             props.setListSelectIsEnabled(true);
           }}
           data-tip='Move item'
