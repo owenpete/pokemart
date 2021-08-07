@@ -17,6 +17,6 @@ export const addOrder = (orderId: string) =>{
       orderId: orderId
     }
   }
-  window.localStorage.setItem(orderStorageName, orderObject);
+  window.localStorage.setItem(orderStorageName, JSON.stringify(orderObject));
 }
 

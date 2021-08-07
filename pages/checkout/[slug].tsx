@@ -8,6 +8,7 @@ import SubNav from '../../components/SubNav';
 import Loading from '../../components/Loading';
 
 import { getCart, clearCart } from '../../utils/cartOps';
+import { addOrder } from '../../utils/orderOps';
 import getCartSize from '../../utils/getCartSize';
 import getQuantity from '../../utils/getQuantity';
 import getTotalValue from '../../utils/getTotalValue';
@@ -177,6 +178,7 @@ export default function Checkout(props: Props){
                       });
                       await router.push(`/orders/${orderId.data}/complete`);
                       clearCart();
+                      addOrder(orderId.data);
                     }catch(err){
                       console.error(err)
                     }
@@ -190,6 +192,7 @@ export default function Checkout(props: Props){
                         subtotal: (props.ticket.product.price*props.ticket.qty)+(taxRate*(props.ticket.product.price*props.ticket.qty))+shipping,
                       });
                       await router.push(`/orders/${orderId.data}/complete`);
+                      addOrder(orderId.data);
                     }catch(err){
                       console.error(err)
                     }
