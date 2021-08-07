@@ -19,6 +19,16 @@
   margin-left: 1rem;
   padding: 1rem;
   border-radius: 5px;
+  .list__header{
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 1.5px;
+    color: var(--brandBlue);
+    padding: 0.5rem;
+    margin: 0;
+    border: 1px solid var(--brandBlueLight);
+    border-style: none none solid none;
+  }
 }
 
 .lists__list-element{

@@ -115,6 +115,9 @@ const Lists = (props: Props)=>{
             }
           </ul>
           <div className='list__contents'>
+          <h1 className='list__header'>
+            {currentListData.listName} ({currentListData.listItems.length})
+          </h1>
             {currentListData.listItems.length!=0?
               currentListData.listItems.map((value: any, index: number)=>{
                   return(
@@ -130,8 +133,7 @@ const Lists = (props: Props)=>{
                 })
                 :
                   <span style={{margin: 'auto'}}>No items in "{currentListData.listName}"</span>
-            }
-          </div>
+            }          </div>
         </div>
       }
       {!lists&&isLoaded&&
