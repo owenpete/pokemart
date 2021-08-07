@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import ListSelect from '../../components/ListSelect';
 import Navbar from '../../components/Navbar';
@@ -6,6 +7,7 @@ import SubNav from '../../components/SubNav';
 import Loading from '../../components/Loading';
 import CreateList from '../../components/CreateList';
 import ListItem from '../../components/ListItem';
+import VerifyDelete from '../../components/lists/VerifyDelete';
 import { FiTrash } from 'react-icons/fi';
 import localInstance from '../../services/api/localInstance';
 import sortIdSync from '../../utils/sortIdSync';
@@ -18,6 +20,7 @@ interface Props{
 }
 
 const Lists = (props: Props)=>{
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isCreatingList, setIsCreatingList] = useState<boolean>(false);
   const [rerender, setRerender] = useState<boolean>(false);
@@ -27,12 +30,20 @@ const Lists = (props: Props)=>{
   const [listSelectIsEnabled, setListSelectIsEnabled] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<any>(null);
 
+  const [verifyDeleteIsEnabled, setVerifyDeleteIsEnabled] = useState<boolean>(false);
+  const [listToRemove, setListToRemove] = useState<any>(undefined);
+
   const fetchData = () =>{
     setIsLoaded(false);
     setLists(undefined);
     (async() =>{
       const list: any = getLists();
       const listArray: any[] = list? Object.values(list) : [];
+      // if list path doesn't exist, re-route to /lists
+      if(!list[router.query?.slug?.toString()] && router.asPath!='/lists'){
+        router.push('/lists')
+        return;
+      }
       let localCurrentListIndex = currentListIndex;
       if(list && props.listId){
         const listIndex = Object.values(list).indexOf(list[props.listId]);
@@ -78,14 +89,22 @@ const Lists = (props: Props)=>{
   return (
     <div className='lists'>
       {lists&&isLoaded&&
-        <ListSelect
-          isEnabled={listSelectIsEnabled}
-          setIsEnabled={setListSelectIsEnabled}
-          product={selectedItem}
-          mode={'move'}
-          currentListId={currentListData.listId}
-          refetchData={fetchData}
-        />
+        <>
+          <ListSelect
+            isEnabled={listSelectIsEnabled}
+            setIsEnabled={setListSelectIsEnabled}
+            product={selectedItem}
+            mode={'move'}
+            currentListId={currentListData.listId}
+            refetchData={fetchData}
+          />
+          <VerifyDelete
+            listToRemove={listToRemove}
+            isEnabled={verifyDeleteIsEnabled}
+            setIsEnabled={setVerifyDeleteIsEnabled}
+            refetchData={fetchData}
+          />
+        </>
       }
       <Navbar />
       <SubNav />
@@ -114,8 +133,14 @@ const Lists = (props: Props)=>{
                         <div
                           className='list-element__remove-list-container'
                           onClick={()=>{
-                            removeList(value.listId);
-                            fetchData();
+                            // if list has items in it show user a prompt, otherwise delete without showing prompt
+                            if(value.listItems.length>0){
+                              setListToRemove(value);
+                              setVerifyDeleteIsEnabled(true);
+                            }else{
+                              removeList(value.listId);
+                              fetchData();
+                            }
                           }}
                         >
                           <FiTrash className='list-element__remove-list-icon'/>
