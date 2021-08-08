@@ -13,7 +13,7 @@ export default async function (req: any, res: any) {
         await product
         .where("productId")
         .in(productIds);
-      const sortedData = sortIdSync(productData, productIds);
+      const sortedData = sortIdSync('productId', productData, productIds);
       res.status(200).json(sortedData);
     } catch (err: any) {
       console.log(err);

@@ -27,7 +27,7 @@ export async function getServerSideProps({ query }){
   let cart: any = null;
   let orders: any = null;
   try{
-    orders = await localInstance.get('/store/orders', {
+    orders = await localInstance.get('/store/getOrderData', {
       params: {
         orderId: orderId
       }

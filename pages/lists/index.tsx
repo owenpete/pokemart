@@ -60,7 +60,7 @@ const Lists = (props: Props)=>{
               productIds: JSON.stringify(listItemIds)
             }
           });
-          const sortedData: any = sortIdSync(listRes.data, listItemIds);
+          const sortedData: any = sortIdSync('productId', listRes.data, listItemIds);
           const finalList = makeList(listArray[localCurrentListIndex], sortedData);
           // setting states
           setCurrentListIndex(localCurrentListIndex);

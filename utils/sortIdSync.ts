@@ -1,8 +1,8 @@
 //sorts and syncs product data in the order of which the ids appear
-const sortIdSync = (productData: any, productIds: string[]) =>{
+const sortIdSync = (idLocation: string, productData: any, productIds: string[]) =>{
   const sortedData = productIds.map((value: any)=>{
     for(let i = 0; i < productData.length; i++){
-      if(productData[i].productId == value){
+      if(productData[i][idLocation]== value){
         return (
           productData[i]
         );
