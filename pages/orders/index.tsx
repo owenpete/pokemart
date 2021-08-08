@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getOrders } from '../../utils/orderOps';
+import makeOrder from '../../utils/makeOrder';
 import localInstance from '../../services/api/localInstance';
 import Navbar from '../../components/Navbar';
 import SubNav from '../../components/SubNav';
@@ -22,10 +23,11 @@ const OrdersList = () =>{
           orderIds: JSON.stringify(orderIds)
         }
       });
-      setOrderData(orderData.data);
+      const finalOrder = await makeOrder(orderData.data, orderIds);
+      setOrderData(finalOrder);
     }
     setIsLoaded(true);
-    }
+  }
 
   useEffect(()=>{
     fetchOrderData();
@@ -55,19 +57,5 @@ const OrdersList = () =>{
     </div>
   );
 }
-
-            //{orderData.map((value: any)=>{
-              //console.log(value)
-              //return (
-                //<li className='orders__element'>
-                  //<Link
-                    //href={`/orders/${value._id}`}
-                  //>
-                    //<a>{value._id}</a>
-                  //</Link>
-                //</li>
-              //)
-            //})
-            //}
 
 export default OrdersList;
