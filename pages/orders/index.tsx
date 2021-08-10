@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getOrders, verifyOrderExists } from '../../utils/orderOps';
+import formatItemText from '../../utils/formatItemText';
 import makeOrder from '../../utils/makeOrder';
 import localInstance from '../../services/api/localInstance';
 import Navbar from '../../components/Navbar';
@@ -50,6 +51,7 @@ const OrdersList = () =>{
             </tr>
             {
               orderData.map((value: any)=>{
+                console.log(value)
                 return (
                   <tr className='orders__table-element orders__table-row'>
                     <td className='orders__table-order-id'>
@@ -60,7 +62,7 @@ const OrdersList = () =>{
                       </Link>
                     </td>
                     <td className='orders__table-item-count'>
-                      {value.order.length} {value.order.length==1?'item':'items'}
+                      {value.order.length} {formatItemText(value.order.length)}
                     </td>
                     <td className='orders__table-total'>
                       ${value.total}

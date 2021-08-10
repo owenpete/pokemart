@@ -12,6 +12,7 @@ import { FiTrash } from 'react-icons/fi';
 import localInstance from '../../services/api/localInstance';
 import sortIdSync from '../../utils/sortIdSync';
 import { getLists, removeList } from '../../utils/listOps';
+import formatItemText from '../../utils/formatItemText';
 import makeList from '../../utils/makeList';
 import toggleDimmer from '../../utils/toggleDimmer';
 
@@ -118,7 +119,7 @@ const Lists = (props: Props)=>{
                       >
                         <a className='list-element__info'>
                           <span className='list-element__list-name'>{value.listName}</span>
-                          <span className='list-element__total-items'>{value.listItems.length} {value.listItems.length==1?'item':'items'}</span>
+                          <span className='list-element__total-items'>{value.listItems.length} {formatItemText(value.listItems.length)}</span>
                         </a>
                       </Link>
                       {!value.default&&
