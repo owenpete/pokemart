@@ -22,23 +22,27 @@ const [cart, setCart] = useState<any>();
 const [cartIds, setCartIds] = useState<any>();
 const [rerender, setRerender] = useState<boolean>(true);
 const [isLoaded, setIsLoaded] = useState<boolean>(false);
-useEffect(()=>{
+
+const fetchData = async() =>{
   setIsLoaded(false);
   setCart(undefined);
-  (async() =>{
-    const ids = getCart();
-    const data = await localInstance.get('products/getMany', {
+  const cart = getCart();
+  if(cart!=null){
+    const cartRes = await localInstance.get('products/getMany', {
       params: {
-        productIds: JSON.stringify(Object.values(ids).map((value: any)=>value.productId))
+        productIds: JSON.stringify(Object.values(cart).map((value: any)=>value.productId))
       }
     });
-  if(data.data){
-    console.log(data.data)
-    setCart(data.data);
-    setCartIds(Object.values(ids));
+    if(cartRes.data){
+      setCart(cartRes.data);
+      setCartIds(Object.values(cart));
+    }
   }
   setIsLoaded(true);
-  })();
+}
+
+useEffect(()=>{
+  fetchData();
 }, [rerender])
 
 return (
