@@ -19,7 +19,7 @@ const OrdersList = () =>{
     const orders = getOrders();
     if(orders){
       const orderIds = Object.values(orders).map((value: any)=>value.orderId);
-      const orderData = await localInstance.get('/store/getOrders', {
+      const orderData = await localInstance.get('/orders/getOrders', {
         params: {
           orderIds: JSON.stringify(orderIds)
         }

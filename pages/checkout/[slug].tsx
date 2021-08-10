@@ -170,7 +170,7 @@ export default function Checkout(props: Props){
                   if(props.ticket.checkoutMethod=='cart'){
                     try{
                       //creates new order in database and returns the _id
-                      const orderId = await localInstance.post('/store/processOrder', {
+                      const orderId = await localInstance.post('/orders/processOrder', {
                         order: JSON.stringify(orderIds),
                         tax: taxRate*getTotalValue(orderItems, orderIds),
                         shipping: shipping,
@@ -185,7 +185,7 @@ export default function Checkout(props: Props){
                   }else if(props.ticket.checkoutMethod=='bin'){
                     try{
                       //creates new order in database and returns the _id
-                      const orderId = await localInstance.post('/store/processOrder', {
+                      const orderId = await localInstance.post('/orders/processOrder', {
                         order: JSON.stringify([{...props.ticket.product, qty: props.ticket.qty}]),
                         tax: taxRate*(props.ticket.product.price*props.ticket.qty),
                         shipping: shipping,

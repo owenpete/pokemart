@@ -44,7 +44,7 @@ export const verifyOrderExists = async() =>{
     const orderIds = Object.values(orders).map((value: any)=>value.orderId);
     const orderEntries = Object.entries(orders);
     for(let i = 0; i < orderIds.length; i++){
-      const orderExists = await localInstance.get('/store/orderExists', {
+      const orderExists = await localInstance.get('/orders/orderExists', {
         params: {
           orderId: JSON.stringify(orderIds[i])
         }
