@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getOrders } from '../../utils/orderOps';
+import { getOrders, verifyOrderExists } from '../../utils/orderOps';
 import makeOrder from '../../utils/makeOrder';
 import localInstance from '../../services/api/localInstance';
 import Navbar from '../../components/Navbar';
@@ -15,6 +15,7 @@ const OrdersList = () =>{
   const fetchOrderData = async() =>{
     setIsLoaded(false);
     setOrderData(undefined);
+    await verifyOrderExists();
     const orders = getOrders();
     if(orders){
       const orderIds = Object.values(orders).map((value: any)=>value.orderId);
@@ -39,8 +40,39 @@ const OrdersList = () =>{
       <SubNav />
       {orderData&&isLoaded&&
         <div className='orders__container'>
-          <ul className='orders__list'>
-          </ul>
+          <h1 className='orders__header'>Recent Orders:</h1>
+          <table className='orders__table'>
+            <tr className='orders__table-header-container orders__table-row'>
+              <th>Order Id</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Order Date</th>
+            </tr>
+            {
+              orderData.map((value: any)=>{
+                return (
+                  <tr className='orders__table-element orders__table-row'>
+                    <td className='orders__table-order-id'>
+                      <Link
+                        href={`/orders/${value._id}`}
+                      >
+                        <a className='orders__table-order-link'>{value._id}</a>
+                      </Link>
+                    </td>
+                    <td className='orders__table-item-count'>
+                      {value.order.length} {value.order.length==1?'item':'items'}
+                    </td>
+                    <td className='orders__table-total'>
+                      ${value.total}
+                    </td>
+                    <td className='orders__table-order-date'>
+                      {new Date(value.orderDate).toLocaleDateString()}
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </table>
         </div>
       }
       {!orderData&&isLoaded&&
