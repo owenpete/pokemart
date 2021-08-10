@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { getCart } from '../utils/cartOps';
 import getCartSize from '../utils/getCartSize';
 import Link from 'next/link';
-import { FiX, FiAlertTriangle, FiHome, FiShoppingBag, FiShoppingCart, FiList, FiPackage } from 'react-icons/fi';
-import { FaGithub } from 'react-icons/fa';
+import { FiX, FiAlertTriangle, FiHome, FiShoppingBag, FiShoppingCart, FiList, FiPackage, FiGithub } from 'react-icons/fi';
 
 interface Props{
   isToggled: boolean;
@@ -89,7 +88,7 @@ const SideNav = (props: Props) =>{
           target='_blank'
           href='https://github.com/owenpete/pokemart'
         >
-          <FaGithub className='sidenav__icon'/>
+          <FiGithub className='sidenav__icon'/>
           <span>Srouce code</span>
         </a>
         <Link
