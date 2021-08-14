@@ -11,7 +11,7 @@ import VerifyDelete from '../../components/lists/VerifyDelete';
 import { FiTrash } from 'react-icons/fi';
 import localInstance from '../../services/api/localInstance';
 import sortIdSync from '../../utils/sortIdSync';
-import { getLists, removeList } from '../../utils/listOps';
+import { getLists, clearList, removeList } from '../../utils/listOps';
 import formatItemText from '../../utils/formatItemText';
 import makeList from '../../utils/makeList';
 import toggleDimmer from '../../utils/toggleDimmer';
@@ -145,9 +145,30 @@ const Lists = (props: Props)=>{
             }
           </ul>
           <div className='list__contents'>
-          <h1 className='list__header'>
-            {currentListData.listName} ({currentListData.listItems.length})
-          </h1>
+          <div className='list__header-container'>
+            <h1 className='list__header'>
+              {currentListData.listName} ({currentListData.listItems.length})
+            </h1>
+            <div className='list__header-action-container'>
+              <input
+                className='list__header-create-order list__header-action'
+                type='button'
+                value='Create Order'
+                onClick={()=>{
+                  router.push(`/checkout/list/${currentListData.listId}`)
+                }}
+              />
+              <input
+                className='list__header-clear-list list__header-action'
+                type='button'
+                value='Clear List'
+                onClick={()=>{
+                  clearList(currentListData.listId);
+                  fetchData();
+                }}
+              />
+            </div>
+          </div>
             {currentListData.listItems.length!=0?
               currentListData.listItems.map((value: any, index: number)=>{
                   return(

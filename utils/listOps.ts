@@ -75,6 +75,17 @@ export const removeList = (listId: string) =>{
   window.localStorage.setItem(listStorageName, JSON.stringify(lists));
 }
 
+export const clearList = (listId: string) =>{
+  let lists: any = getLists();
+  lists = {
+    ...lists,
+    [listId]: {
+      ...lists[listId],
+      listItems: []
+    }
+  }
+  window.localStorage.setItem(listStorageName, JSON.stringify(lists));
+}
 export const addToList = (listId: string, productId: string) =>{
   const lists: any = getLists();
   const hasLists: boolean = lists!=null;
