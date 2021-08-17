@@ -51,7 +51,6 @@ const OrdersList = () =>{
             </tr>
             {
               orderData.map((value: any)=>{
-                console.log(value)
                 return (
                   <tr className='orders__table-element orders__table-row'>
                     <td className='orders__table-order-id'>
