@@ -15,7 +15,8 @@ const CreateList = (props: Props) =>{
 
   const submitList = (listName: string) =>{
     if(listName!=''){
-      createList(listName); props.setIsCreatingList(false)
+      createList(listName);
+      props.setIsCreatingList(false)
       props.refetchData();
     }
   }

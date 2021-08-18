@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getLists, addToList, moveListItem } from '../utils/listOps';
+import { createList, getLists, addToList, moveListItem } from '../utils/listOps';
 import toggleDimmer from '../utils/toggleDimmer';
 
 import Image from 'next/image';
 import Loading from '../components/Loading';
+import CreateList from '../components/CreateList';
 
 import { FiX } from 'react-icons/fi';
 
@@ -19,11 +20,15 @@ interface Props{
 const ListSelect = (props: Props) =>{
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [lists, setLists] = useState<any[]>();
+  const [isCreatingList, setIsCreatingList] = useState<boolean>(false);
+  const refreshLocalData = () =>{
+    const listArray = Object.values(getLists());
+    setLists(listArray);
+  }
   useEffect(()=>{
     setIsLoaded(false);
     toggleDimmer(props.isEnabled);
-    const listArray = Object.values(getLists());
-    setLists(listArray);
+    refreshLocalData();
     setIsLoaded(true);
   }, [props.isEnabled]);
 
@@ -41,6 +46,7 @@ const ListSelect = (props: Props) =>{
           </div>
           <ul className='list-select__list'>
             {lists.map((value: any, index: number)=>{
+              console.log(lists)
               return (
                 <li
                   className='list-select__element'
@@ -66,6 +72,16 @@ const ListSelect = (props: Props) =>{
             })
             }
           </ul>
+          <div className='list-select__create-list-container'>
+            <input
+              className='list-select__create-list-button'
+              type='button'
+              value="Create new list"
+              onClick={()=>{
+                setIsCreatingList(true);
+              }}
+            />
+          </div>
         </div>
       </div>
       :
@@ -74,6 +90,13 @@ const ListSelect = (props: Props) =>{
       :
       <>
       </>
+    }
+    {isLoaded&&isCreatingList&&
+      <CreateList
+        isCreatingList={isCreatingList}
+        setIsCreatingList={setIsCreatingList}
+        refetchData={props.refetchData || refreshLocalData}
+      />
     }
   </>
   );

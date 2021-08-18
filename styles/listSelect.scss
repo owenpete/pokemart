@@ -57,3 +57,26 @@
     }
   }
 }
+
+.list-select__create-list-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .list-select__create-list-button{
+    display: flex;
+    align-items: center;
+    font-size: 21px;
+    justify-content: center;
+    height: 45px;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0;
+    border: 1px solid var(--green);
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all 100ms ease-in-out;
+    &:hover{
+      background-color: var(--green);
+  }
+  }
+}
