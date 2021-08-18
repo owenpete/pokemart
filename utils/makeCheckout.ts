@@ -27,8 +27,6 @@ const makeCheckout = (checkoutItems: Order[], checkoutIds: {}[], checkoutIdLocat
       ...checkoutIds[index]
     }
   });
-  console.log(checkoutIds)
-  console.log(mergedData)
   return mergedData;
 }
 

@@ -145,7 +145,7 @@ export default function Checkout(props: Props){
                   </span>
                 </span>
               </div>
-              {props.checkoutMethod=='cart' || props.checkoutMethod=='list'&&
+              {(props.checkoutMethod=="cart" || props.checkoutMethod=="list")&&
                 order.map((value: any)=>{
                   return(
                     <>
