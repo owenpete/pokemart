@@ -9,6 +9,15 @@ import Navbar from '../../components/Navbar';
 import SubNav from '../../components/SubNav';
 import Loading from '../../components/Loading';
 
+const getOrderSize = (order: any[]) =>{
+  const orderSize = order.map((value: any)=>{
+    return value.qty;
+  }).reduce((total: number, currentValue: number)=>{
+    return total+=currentValue;
+  });
+  return orderSize;
+}
+
 const OrdersList = () =>{
   const [orderData, setOrderData] = useState<any>(undefined);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -51,6 +60,7 @@ const OrdersList = () =>{
             </tr>
             {
               orderData.map((value: any)=>{
+                getOrderSize(value.order)
                 return (
                   <tr className='orders__table-element orders__table-row'>
                     <td className='orders__table-order-id'>
@@ -61,7 +71,7 @@ const OrdersList = () =>{
                       </Link>
                     </td>
                     <td className='orders__table-item-count'>
-                      {value.order.length} {formatItemText(value.order.length)}
+                      {getOrderSize(value.order)} {formatItemText(value.order.length)}
                     </td>
                     <td className='orders__table-total'>
                       ${value.total}
