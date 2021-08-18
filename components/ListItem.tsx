@@ -21,7 +21,7 @@ interface Props{
 const listItem = (props: Props) =>{
   useEffect(()=>{
     toggleDimmer(props.listSelectIsEnabled);
-  });
+  }, [props.listSelectIsEnabled]);
   return (
     <div className='list-item'>
       <ReactTooltip

@@ -14,7 +14,6 @@ import sortIdSync from '../../utils/sortIdSync';
 import { getLists, clearList, removeList } from '../../utils/listOps';
 import formatItemText from '../../utils/formatItemText';
 import makeList from '../../utils/makeList';
-import toggleDimmer from '../../utils/toggleDimmer';
 
 interface Props{
   listId: string;

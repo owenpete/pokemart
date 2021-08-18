@@ -15,7 +15,7 @@ const VerifyDelete = (props: Props) => {
   });
   return (
     <>
-      {props.isEnabled && (
+      {props.isEnabled &&
         <div className="verify-delete__container">
           <div className="verify-delete">
             <span className="verify-delete__message">
@@ -45,7 +45,7 @@ const VerifyDelete = (props: Props) => {
             </div>
           </div>
         </div>
-      )}
+      }
     </>
   );
 };
