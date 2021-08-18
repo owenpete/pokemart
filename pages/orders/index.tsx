@@ -34,8 +34,9 @@ const OrdersList = () =>{
           orderIds: JSON.stringify(orderIds)
         }
       });
-      const finalOrder = await makeOrder(orderData.data, orderIds);
-      setOrderData(finalOrder);
+      const finalOrder: any[] = await makeOrder(orderData.data, orderIds);
+      const orderNewestFirst = finalOrder.reverse();
+      setOrderData(orderNewestFirst);
     }
     setIsLoaded(true);
   }
