@@ -19,14 +19,16 @@ const getIndexOfProductId = (productId: string, productDataCollection: [{product
   }
 }
 
-const makeCheckout = (checkoutItems: Order[], checkoutIds: {}[]) =>{
-  const sortedData = sortIdSync('productId', checkoutItems, checkoutIds.map((value: any)=>value.productId));
+const makeCheckout = (checkoutItems: Order[], checkoutIds: {}[], checkoutIdLocation: string) =>{
+  const sortedData = sortIdSync(checkoutIdLocation, checkoutItems, checkoutIds.map((value: any)=>value.productId));
   const mergedData = sortedData.map((value: any, index: number)=>{
     return {
       ...value,
       ...checkoutIds[index]
     }
   });
+  console.log(checkoutIds)
+  console.log(mergedData)
   return mergedData;
 }
 

@@ -102,7 +102,7 @@ export const addToList = (listId: string, productId: string) =>{
         ...lists,
         [listArray[defaultListIndex].listId]: {
           ...listArray[defaultListIndex],
-          listItems: [...listArray[defaultListIndex].listItems, {productId: productId}]
+          listItems: [...listArray[defaultListIndex].listItems, {productId: productId, qty: 1}]
         }
       }
     }
@@ -113,7 +113,7 @@ export const addToList = (listId: string, productId: string) =>{
         ...lists,
         [listId]: {
           ...lists[listId],
-          listItems: [...lists[listId].listItems, {productId: productId}]
+          listItems: [...lists[listId].listItems, {productId: productId, qty: 1}]
         }
       }
     }

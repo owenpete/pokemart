@@ -11,6 +11,7 @@ import SubNav from '../../components/SubNav';
 import Loading from '../../components/Loading';
 
 import { getCart, clearCart } from '../../utils/cartOps';
+import { getListById } from '../../utils/listOps';
 import { addOrder } from '../../utils/orderOps';
 import localInstance from '../../services/api/localInstance';
 import { taxRate, shipping } from '../../constants/econRates';
@@ -18,6 +19,7 @@ import { taxRate, shipping } from '../../constants/econRates';
 interface Props{
   checkoutMethod: string;
   binItem?: any;
+  listId?: string;
 }
 
 interface BinItem{
@@ -86,12 +88,24 @@ export default function Checkout(props: Props){
       });
       const cartData = cartRes.data;
       if(cartData){
-        const finishedOrder = makeCheckout(cartData, Object.values(productIds));
+        const finishedOrder = makeCheckout(cartData, Object.values(productIds), 'productId');
         setOrder([...finishedOrder]);
       }
     }else if(props.checkoutMethod=='bin'){
       setOrder([props.binItem]);
     }else if(props.checkoutMethod=='list'){
+      const list = getListById(props.listId);
+      const listItems: any[] = list.listItems;
+      const orderRes = await localInstance.get('/products/getMany', {
+        params: {
+          productIds: JSON.stringify(Object.values(listItems).map((value: any)=>value.productId))
+        }
+      });
+      const orderData = orderRes.data;
+      if(orderData){
+        const finishedOrder = makeCheckout(orderData, Object.values(listItems), 'productId');
+        setOrder([...finishedOrder]);
+      }
     }
     setIsLoaded(true);
   }
@@ -131,7 +145,7 @@ export default function Checkout(props: Props){
                   </span>
                 </span>
               </div>
-              {props.checkoutMethod=='cart'&&
+              {props.checkoutMethod=='cart' || props.checkoutMethod=='list'&&
                 order.map((value: any)=>{
                   return(
                     <>
