@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   background-color: transparent;
@@ -27,11 +27,13 @@
 }
 
 .list-select{
-  height: auto;
+  height: 85%;
   width: 25rem;
   background-color: white;
   border-radius: 5px;
   padding: 1.5rem;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .list-select__list{
