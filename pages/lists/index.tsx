@@ -156,17 +156,24 @@ const Lists = (props: Props)=>{
                 className='list__header-create-order list__header-action'
                 type='button'
                 value='Create Order'
+                disabled={!(currentListData.listItems.length > 0)}
                 onClick={()=>{
-                  router.push(`/checkout/list/${currentListData.listId}`)
+                  if(currentListData.listItems.length > 0){
+                    router.push(`/checkout/list/${currentListData.listId}`)
+                  }
                 }}
               />
               <input
                 className='list__header-clear-list list__header-action'
                 type='button'
                 value='Clear List'
+                disabled={!(currentListData.listItems.length > 0)}
                 onClick={()=>{
-                  clearList(currentListData.listId);
-                  fetchData();
+                  console.log(currentListData)
+                  if(currentListData.listItems.length > 0){
+                    clearList(currentListData.listId);
+                    fetchData();
+                  }
                 }}
               />
             </div>

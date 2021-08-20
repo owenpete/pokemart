@@ -88,6 +88,12 @@
     outline: none;
     padding: 0.35rem 0.5rem;
     transition: all 100ms ease-in-out;
+    &:disabled{
+      background-color: var(--offWhite);
+      &:hover{
+        background-color: var(--offWhite);
+      }
+    }
   }
   .list__header-create-order{
     background-color: var(--offWhite);
