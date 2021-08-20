@@ -39,8 +39,6 @@ Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(()=>{
-    //create a default wish list if there isnt one already
-    initDefaultList();
   });
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   return(

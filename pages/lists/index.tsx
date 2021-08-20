@@ -11,7 +11,7 @@ import VerifyDelete from '../../components/lists/VerifyDelete';
 import { FiTrash } from 'react-icons/fi';
 import localInstance from '../../services/api/localInstance';
 import sortIdSync from '../../utils/sortIdSync';
-import { getLists, clearList, removeList } from '../../utils/listOps';
+import { initDefaultList, getLists, clearList, removeList } from '../../utils/listOps';
 import formatItemText from '../../utils/formatItemText';
 import makeList from '../../utils/makeList';
 
@@ -35,11 +35,14 @@ const Lists = (props: Props)=>{
   const fetchData = () =>{
     setIsLoaded(false);
     setLists(undefined);
+    initDefaultList();
+    console.log('yo from index');
     (async() =>{
       const list: any = getLists();
       const listArray: any[] = list? Object.values(list) : [];
+      const listPathExists = (list != undefined && list[router.query?.slug?.toString()] != undefined);
       // if list path doesn't exist, re-route to /lists
-      if(!list[router.query?.slug?.toString()] && router.asPath!='/lists'){
+      if(!listPathExists && router.asPath!='/lists'){
         router.push('/lists')
         return;
       }

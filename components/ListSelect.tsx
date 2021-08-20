@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createList, getLists, addToList, moveListItem } from '../utils/listOps';
+import { initDefaultList, createList, getLists, addToList, moveListItem } from '../utils/listOps';
 import toggleDimmer from '../utils/toggleDimmer';
 
 import Image from 'next/image';
@@ -26,6 +26,7 @@ const ListSelect = (props: Props) =>{
     setLists(listArray);
   }
   useEffect(()=>{
+    initDefaultList();
     setIsLoaded(false);
     toggleDimmer(props.isEnabled);
     refreshLocalData();
