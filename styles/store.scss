@@ -7,6 +7,18 @@ $storePadding: 18%;
   width: 100%;
 }
 
+.store__no-res{
+  $fontSize: 24px;
+  display: inline-block;
+  width: 100%;
+  margin-top: 4rem;
+  text-align: center;
+  font-size: $fontSize;
+  b{
+    font-size: $fontSize;
+  }
+}
+
 .resbar__left{
   display: flex;
   align-items: center;

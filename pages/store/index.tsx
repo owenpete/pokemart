@@ -29,16 +29,15 @@ export async function getServerSideProps({query}){
     page: query.page || 1
   }
 
-  const productList = await localInstance.get('/products', {
+  const products = await localInstance.get('/products/search', {
     params: {
-      // how many items to skip based on page number
       skip: 8*(query.page-1),
-      // limit to 8 results per page
       limit: 8,
       ...query
     }
   });
-  const productListData = await productList.data;
+
+  const productListData = await products.data;
   return {
     props: {
       products: productListData.data,
@@ -110,56 +109,66 @@ export default function Store(props: Props){
       </Head>
       <Navbar />
       <SubNav />
-      <div className='store__resbar'>
-        <div className='resbar__left'>
-          <span className='resbar__result-number'>{(props.page-1)*resPerPage+1}-{resPerPage*props.page>props.totalResults?props.totalResults:resPerPage*props.page} of {props.totalResults} items</span>
-        </div>
-          <div className='resbar__right'>
-            <div className='resbar__filter'>
-              <input className='resbar__dropdown-button' value={`Sort by: ${filter}`} type='button' />
-              <FiChevronDown className='resbar__dropdown-arrow' />
-              <select
-                name='catagories'
-                className='resbar__dropdown'
-                onChange={(e)=>{handleFilter(e.target.value)}}
-                value={filter}
-              >
-                {
-                  //populating filters
-                  filterCategories.map((value)=>{
-                    return (
-                      <option value={value.name} key={Math.random()}>{value.name}</option>
-                    );
-                  })
-                }
-              </select>
+      {props.totalResults>0?
+      <>
+        <div className='store__resbar'>
+          <div className='resbar__left'>
+            <span className='resbar__result-number'>{(props.page-1)*resPerPage+1}-{resPerPage*props.page>props.totalResults?props.totalResults:resPerPage*props.page} of {props.totalResults} items</span>
+          </div>
+            <div className='resbar__right'>
+              <div className='resbar__filter'>
+                <input className='resbar__dropdown-button' value={`Sort by: ${filter}`} type='button' />
+                <FiChevronDown className='resbar__dropdown-arrow' />
+                <select
+                  name='catagories'
+                  className='resbar__dropdown'
+                  onChange={(e)=>{handleFilter(e.target.value)}}
+                  value={filter}
+                >
+                  {
+                    //populating filters
+                    filterCategories.map((value)=>{
+                      return (
+                        <option value={value.name} key={Math.random()}>{value.name}</option>
+                      );
+                    })
+                  }
+                </select>
+            </div>
           </div>
         </div>
-      </div>
-      <ul className='store__main'>
-        {
-          //populating page with products
-          props.products.map((value: any)=>{
-            return (
-              <ProductCard
-                img={value.images[0]}
-                name={value.name}
-                description={value.description}
-                price={value.price}
-                rating={value.rating}
-                href={value.productId}
-                key={Math.random()}
-              />
-            )
-          })
-        }
-      </ul>
-      <PageSelector
-        pageCount={getPageCount(props.totalResults, resPerPage)}
-        pageNumber={pageNumber}
-        setPageNumber={setPageNumber}
-        query={props.query}
-      />
+        <ul className='store__main'>
+          {
+            //populating page with products
+            props.products.map((value: any)=>{
+              return (
+                <ProductCard
+                  img={value.images[0]}
+                  name={value.name}
+                  description={value.description}
+                  price={value.price}
+                  rating={value.rating}
+                  href={value.productId}
+                  key={Math.random()}
+                />
+              )
+            })
+          }
+        </ul>
+        <PageSelector
+          pageCount={getPageCount(props.totalResults, resPerPage)}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          query={props.query}
+        />
+      </>
+      :
+      <span
+        className='store__no-res'
+      >
+        No results for "<b>{props.query.q}</b>"
+      </span>
+      }
     </div>
   );
 }
