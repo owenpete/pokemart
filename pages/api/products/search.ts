@@ -1,13 +1,36 @@
 import connectStore from "../../../services/connectStore";
 import ProductSchema from "../../../schemas/ProductSchema";
 
+interface SearchData{
+  data: any;
+  totalResults: number;
+}
+
 export default async function (req: any, res: any) {
   const db = await connectStore();
   const { q, f, skip, limit } = req.query;
   const searchModel = db.model('product', ProductSchema);
   let data:  any;
   let totalResults: number;
-  if(q != null){
+
+  console.log(q)
+
+  const defaultSearch: any = async() =>{
+    const data: any = await searchModel.find({
+    })
+    .sort({nos: 'asc'})
+    .skip(parseInt(skip))
+    .limit(parseInt(limit));
+    const totalResults: number = await searchModel.find({
+    })
+    .countDocuments();
+    return {
+      data: data,
+      totalResults: totalResults
+    }
+  }
+
+  if(q != null && q != undefined && q != ""){
     data = await searchModel.find({
       $text: {
         $search: q,
@@ -59,22 +82,15 @@ export default async function (req: any, res: any) {
         totalResults = await searchModel.find(q).countDocuments();
         break;
       default:
-        data = await searchModel
-          .find(q)
-          .skip(parseInt(skip))
-          .limit(parseInt(limit));
-        totalResults = await searchModel.find(q).countDocuments();
+        const searchRes = await defaultSearch();
+        data = searchRes.data;
+        totalResults = searchRes.totalResults;
         break;
     }
   }else{
-    data = await searchModel.find({
-    })
-    .sort({nos: 'asc'})
-    .skip(parseInt(skip))
-    .limit(parseInt(limit));
-    totalResults = await searchModel.find({
-    })
-    .countDocuments();
+    const searchRes = await defaultSearch();
+    data = searchRes.data;
+    totalResults = searchRes.totalResults;
   }
 
   res.status(200).json({

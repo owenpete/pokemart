@@ -84,10 +84,15 @@ export default function Store(props: Props){
   const [filter, setFilter] = useState<any>(props.query.f || filterCategories[0].name);
   useEffect(()=>{
     if(props.query.f){
-      setFilter(filterCategories[filterCategories.findIndex(value=>props.query.f==value.filter)].name)
+      try{
+        setFilter(filterCategories[filterCategories.findIndex(value=>props.query.f==value.filter)].name)
+      }catch(err: any){
+        setFilter(filterCategories[0].name);
+      }
     }else{
       setFilter(filterCategories[0].name);
     }
+    console.log(filter)
   }, [props.query.f]);
 
   const handleFilter = (filter: string) =>{
