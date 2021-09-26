@@ -36,7 +36,6 @@ const Lists = (props: Props)=>{
     setIsLoaded(false);
     setLists(undefined);
     initDefaultList();
-    console.log('yo from index');
     (async() =>{
       const list: any = getLists();
       const listArray: any[] = list? Object.values(list) : [];
@@ -169,7 +168,6 @@ const Lists = (props: Props)=>{
                 value='Clear List'
                 disabled={!(currentListData.listItems.length > 0)}
                 onClick={()=>{
-                  console.log(currentListData)
                   if(currentListData.listItems.length > 0){
                     clearList(currentListData.listId);
                     fetchData();

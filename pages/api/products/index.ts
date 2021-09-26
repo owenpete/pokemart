@@ -11,10 +11,8 @@ export default async function (req: any, res: any) {
 
   if(q&&!searchFields){
     query.name=q;
-    console.log(query)
   }else if(searchFields){
     query = Object.assign(query, JSON.parse(searchFields));
-    console.log(query)
   }
 
   const product = db.model("Product", ProductSchema);

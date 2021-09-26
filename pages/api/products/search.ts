@@ -13,8 +13,6 @@ export default async function (req: any, res: any) {
   let data:  any;
   let totalResults: number;
 
-  console.log(q)
-
   const defaultSearch: any = async() =>{
     const data: any = await searchModel.find({
     })

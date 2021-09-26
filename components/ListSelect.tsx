@@ -47,7 +47,6 @@ const ListSelect = (props: Props) =>{
           </div>
           <ul className='list-select__list'>
             {lists.map((value: any, index: number)=>{
-              console.log(lists)
               return (
                 <li
                   className='list-select__element'

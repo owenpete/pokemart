@@ -92,7 +92,6 @@ export default function Store(props: Props){
     }else{
       setFilter(filterCategories[0].name);
     }
-    console.log(filter)
   }, [props.query.f]);
 
   const handleFilter = (filter: string) =>{
