@@ -56,6 +56,24 @@ const getPageCount = (itemCount: number, resPerPage: number) =>{
 }
 
 export default function Store(props: Props){
+  const noResMessage = (filter: string) =>{
+     switch(filter){
+       case 'on-sale':
+         return (
+          <span className='store__no-res'>
+            No items currently on sale :(
+          </span>
+         )
+        break;
+       default:
+        return (
+          <span className='store__no-res'>
+            No results for "<b>{props.query.q}</b>"
+          </span>
+       )
+     }
+  }
+
   const filterCategories = [
     {
       name:'Featured',
@@ -167,11 +185,7 @@ export default function Store(props: Props){
         />
       </>
       :
-      <span
-        className='store__no-res'
-      >
-        No results for "<b>{props.query.q}</b>"
-      </span>
+        noResMessage(props.query.f)
       }
     </div>
   );

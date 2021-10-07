@@ -19,9 +19,6 @@ export default function Navbar(){
   const [cart, setCart] = useState<any>(null);
 
   useEffect(() => {
-    if(router.route == '/store' && router.query.q.toString() != search){
-      setSearch(router.query.q.toString());
-    }
     setSidebarIsOpen(false);
     //pull cart data from storage and display the proper number next to the cart icon
     setCart(getCart());

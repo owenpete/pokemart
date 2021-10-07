@@ -16,7 +16,7 @@ export default async function (req: any, res: any) {
   const defaultSearch: any = async() =>{
     const data: any = await searchModel.find({
     })
-    .sort({nos: 'asc'})
+    .sort('-nos')
     .skip(parseInt(skip))
     .limit(parseInt(limit));
     const totalResults: number = await searchModel.find({
@@ -79,6 +79,26 @@ export default async function (req: any, res: any) {
           .limit(parseInt(limit));
         totalResults = await searchModel.find(q).countDocuments();
         break;
+
+      case 'best-selling':
+        data = await searchModel
+          .find(q)
+          .sort('-nos')
+          .skip(parseInt(skip))
+          .limit(parseInt(limit));
+        totalResults = await searchModel.find(q).countDocuments();
+        break;
+      case 'on-sale':
+        data = await searchModel
+          .find({
+            sale: true
+          })
+          .sort('-nos')
+          .skip(parseInt(skip))
+          .limit(parseInt(limit));
+        totalResults = await searchModel.find({sale: true}).countDocuments();
+        break;
+
       default:
         const searchRes = await defaultSearch();
         data = searchRes.data;
